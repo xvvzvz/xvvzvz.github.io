@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jsp-servlet模拟登陆之bug | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="错误永远不是一道坎 出现的错误12345678http:status 500   服务区内部错误  显示在Login_01Servlet.java 文件逻辑判断账号和密码一行 显示空指针异常  if(username.equals(&amp;quot;admin&amp;quot;))&amp;#123;	。。。。。。&amp;#125;username 是通过request.getParameter(&amp;quot;usernam">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jsp-servlet模拟登陆之bug">
+<meta property="og:url" content="http://yoursite.com/2018/07/02/jsp-servlet模拟登陆之bug/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="错误永远不是一道坎 出现的错误12345678http:status 500   服务区内部错误  显示在Login_01Servlet.java 文件逻辑判断账号和密码一行 显示空指针异常  if(username.equals(&amp;quot;admin&amp;quot;))&amp;#123;	。。。。。。&amp;#125;username 是通过request.getParameter(&amp;quot;usernam">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-02T03:52:21.684Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jsp-servlet模拟登陆之bug">
+<meta name="twitter:description" content="错误永远不是一道坎 出现的错误12345678http:status 500   服务区内部错误  显示在Login_01Servlet.java 文件逻辑判断账号和密码一行 显示空指针异常  if(username.equals(&amp;quot;admin&amp;quot;))&amp;#123;	。。。。。。&amp;#125;username 是通过request.getParameter(&amp;quot;usernam">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-jsp-servlet模拟登陆之bug" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/02/jsp-servlet模拟登陆之bug/" class="article-date">
+  <time datetime="2018-07-02T03:29:54.187Z" itemprop="datePublished">2018-07-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      jsp-servlet模拟登陆之bug
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>错误永远不是一道坎</p>
+<h3 id="出现的错误"><a href="#出现的错误" class="headerlink" title="出现的错误"></a>出现的错误</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">http:status 500   服务区内部错误  </span><br><span class="line">显示在Login_01Servlet.java 文件逻辑判断账号和密码一行 </span><br><span class="line">显示空指针异常  </span><br><span class="line">if(username.equals(&quot;admin&quot;))&#123;</span><br><span class="line">	。。。。。。</span><br><span class="line">&#125;</span><br><span class="line">username 是通过request.getParameter(&quot;username&quot;); 获取的</span><br><span class="line">username传过来本就是一个null  .equals()就会爆出空指针异常</span><br></pre></td></tr></table></figure>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">把逻辑判断语句if  改为</span><br><span class="line">if(&quot;admin&quot;.equals(username))&#123;</span><br><span class="line">	。。。。。。</span><br><span class="line">&#125;</span><br><span class="line">就可以了</span><br></pre></td></tr></table></figure>
+<h3 id="还有就是内部语法错误-Cannot-forward-after-response-has-beencommitted问题"><a href="#还有就是内部语法错误-Cannot-forward-after-response-has-beencommitted问题" class="headerlink" title="还有就是内部语法错误(Cannot forward after response has beencommitted问题)"></a>还有就是内部语法错误(Cannot forward after response has beencommitted问题)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">这个是错误是由于response多次提交或者是由于有页面显示后仍然含请求转向产生的</span><br><span class="line"></span><br><span class="line">forward(request, response);跳转页面，执行这个语句之后，如果此语句后面还有代码，</span><br><span class="line">既然跳转了页面后面代码执行不了，原页面的代码没有终止一定会出错</span><br></pre></td></tr></table></figure>
+<h3 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">解决方法，在forward(request, response);</span><br><span class="line">跳转后面不要写其他代码，且加上 return;</span><br></pre></td></tr></table></figure>
+<h3 id="自己写的servlet类更改代码后，重新编译，且要重启服务器；修改了配置文件web-xml不需重启，tomcat会重新加载。"><a href="#自己写的servlet类更改代码后，重新编译，且要重启服务器；修改了配置文件web-xml不需重启，tomcat会重新加载。" class="headerlink" title="自己写的servlet类更改代码后，重新编译，且要重启服务器；修改了配置文件web.xml不需重启，tomcat会重新加载。"></a>自己写的servlet类更改代码后，重新编译，且要重启服务器；修改了配置文件web.xml不需重启，tomcat会重新加载。</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/02/jsp-servlet模拟登陆之bug/" data-id="cjj3qbvab0000sgur2sgy1ce6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/06/30/文件上传之git命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">文件上传之git命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/07/02/jsp-servlet模拟登陆之bug/">jsp-servlet模拟登陆之bug</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/30/文件上传之git命令/">文件上传之git命令</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/30/关于文件上传乱码问题解决/">关于文件上传乱码问题解决</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/30/随想/">随想</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/13/myfirst/">myfirst</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
