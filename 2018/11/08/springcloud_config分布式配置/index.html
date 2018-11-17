@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://zengzhi.net.cn">
   <title>springcloud_config分布式配置---通过git获取码云上的配置文件信息 | zengzhi_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="首先大部分公司是不会选择SpringCloud自带的Config分布式配置中心,因为他不符合中国人的习惯. 国内比较出名的分布式配置中心: 携程的 apllo(阿波罗)和zookeeper 不过了解SpringCloud生态，这个是一定要了解的 接下来讲解SpringCloud自带的分布式配置中心Config的一个小案例： 准备：配置好的eclipse 和 能上网的环境 ##一.处理码云这方面 首">
+  <meta name="description" content="首先大部分公司是不会选择SpringCloud自带的Config分布式配置中心,因为他不符合中国人的习惯. 国内比较出名的分布式配置中心: 携程的 apllo(阿波罗)和zookeeper 不过了解SpringCloud生态，这个是一定要了解的 接下来讲解SpringCloud自带的分布式配置中心Config的一个小案例： 准备：配置好的eclipse 和 能上网的环境 ###一.处理码云这方面">
 <meta name="keywords" content="前端,js,jquery,javascript,layui,mui,java,python,大数据,git,svn,SpringBoot,SpringCloud,linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="springcloud_config分布式配置---通过git获取码云上的配置文件信息">
 <meta property="og:url" content="http://zengzhi.net.cn/2018/11/08/springcloud_config分布式配置/index.html">
 <meta property="og:site_name" content="zengzhi_blog">
-<meta property="og:description" content="首先大部分公司是不会选择SpringCloud自带的Config分布式配置中心,因为他不符合中国人的习惯. 国内比较出名的分布式配置中心: 携程的 apllo(阿波罗)和zookeeper 不过了解SpringCloud生态，这个是一定要了解的 接下来讲解SpringCloud自带的分布式配置中心Config的一个小案例： 准备：配置好的eclipse 和 能上网的环境 ##一.处理码云这方面 首">
+<meta property="og:description" content="首先大部分公司是不会选择SpringCloud自带的Config分布式配置中心,因为他不符合中国人的习惯. 国内比较出名的分布式配置中心: 携程的 apllo(阿波罗)和zookeeper 不过了解SpringCloud生态，这个是一定要了解的 接下来讲解SpringCloud自带的分布式配置中心Config的一个小案例： 准备：配置好的eclipse 和 能上网的环境 ###一.处理码云这方面">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-22T14:01:31.180Z">
+<meta property="og:updated_time" content="2018-11-17T05:07:54.793Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springcloud_config分布式配置---通过git获取码云上的配置文件信息">
-<meta name="twitter:description" content="首先大部分公司是不会选择SpringCloud自带的Config分布式配置中心,因为他不符合中国人的习惯. 国内比较出名的分布式配置中心: 携程的 apllo(阿波罗)和zookeeper 不过了解SpringCloud生态，这个是一定要了解的 接下来讲解SpringCloud自带的分布式配置中心Config的一个小案例： 准备：配置好的eclipse 和 能上网的环境 ##一.处理码云这方面 首">
+<meta name="twitter:description" content="首先大部分公司是不会选择SpringCloud自带的Config分布式配置中心,因为他不符合中国人的习惯. 国内比较出名的分布式配置中心: 携程的 apllo(阿波罗)和zookeeper 不过了解SpringCloud生态，这个是一定要了解的 接下来讲解SpringCloud自带的分布式配置中心Config的一个小案例： 准备：配置好的eclipse 和 能上网的环境 ###一.处理码云这方面">
   
     <link rel="alternative" href="/atom.xml" title="zengzhi_blog" type="application/atom+xml">
   
@@ -181,7 +181,7 @@
 <p>不过了解SpringCloud生态，这个是一定要了解的</p>
 <p>接下来讲解SpringCloud自带的分布式配置中心Config的一个小案例：</p>
 <p>准备：配置好的eclipse 和 能上网的环境</p>
-<p>##一.处理码云这方面</p>
+<p>###一.处理码云这方面</p>
 <p>首先我们可以注册一个码云账号</p>
 <p>然后在右上角创建一个项目</p>
 <p>然后填写一个.md文件</p>
@@ -190,7 +190,7 @@
 <p>建立另一个文件夹test-configclient-sit.properties —在文件夹写入info=sit.baidu.com</p>
 <p>(这里有疑问先不管,看后面。)</p>
 <p>###二，在eclipse建立maven项目</p>
-<pre><code>#### 首先建立一个名称为spring-cloud-eureka-server的maven项目（用eureka作为配置中心）
+<pre><code>首先建立一个名称为spring-cloud-eureka-server的maven项目（用eureka作为配置中心）
 </code></pre><p>管理依赖:</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&lt;parent&gt;</span></span><br><span class="line">		<span class="string">&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span></span><br><span class="line">		<span class="string">&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span></span><br><span class="line">		<span class="string">&lt;version&gt;2.0.1.RELEASE&lt;/version&gt;</span></span><br><span class="line">	<span class="string">&lt;/parent&gt;</span></span><br><span class="line">	<span class="string">&lt;!--</span> <span class="string">管理依赖</span> <span class="bullet">--&gt;</span></span><br><span class="line">	<span class="string">&lt;dependencyManagement&gt;</span></span><br><span class="line">		<span class="string">&lt;dependencies&gt;</span></span><br><span class="line">			<span class="string">&lt;dependency&gt;</span></span><br><span class="line">				<span class="string">&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span></span><br><span class="line">				<span class="string">&lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;</span></span><br><span class="line">				<span class="string">&lt;version&gt;Finchley.M7&lt;/version&gt;</span></span><br><span class="line">				<span class="string">&lt;type&gt;pom&lt;/type&gt;</span></span><br><span class="line">				<span class="string">&lt;scope&gt;import&lt;/scope&gt;</span></span><br><span class="line">			<span class="string">&lt;/dependency&gt;</span></span><br><span class="line">		<span class="string">&lt;/dependencies&gt;</span></span><br><span class="line">	<span class="string">&lt;/dependencyManagement&gt;</span></span><br><span class="line">	<span class="string">&lt;dependencies&gt;</span></span><br><span class="line">		<span class="string">&lt;!--SpringCloud</span> <span class="string">eureka-server</span> <span class="bullet">--&gt;</span></span><br><span class="line">		<span class="string">&lt;dependency&gt;</span></span><br><span class="line">			<span class="string">&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span></span><br><span class="line">			<span class="string">&lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;</span></span><br><span class="line">		<span class="string">&lt;/dependency&gt;</span></span><br><span class="line">	<span class="string">&lt;/dependencies&gt;</span></span><br><span class="line">	<span class="string">&lt;!--</span> <span class="string">注意：</span> <span class="string">这里必须要添加，</span> <span class="string">否者各种依赖有问题</span> <span class="bullet">--&gt;</span></span><br><span class="line">	<span class="string">&lt;repositories&gt;</span></span><br><span class="line">		<span class="string">&lt;repository&gt;</span></span><br><span class="line">			<span class="string">&lt;id&gt;spring-milestones&lt;/id&gt;</span></span><br><span class="line">			<span class="string">&lt;name&gt;Spring</span> <span class="string">Milestones&lt;/name&gt;</span></span><br><span class="line">			<span class="string">&lt;url&gt;https://repo.spring.io/libs-milestone&lt;/url&gt;</span></span><br><span class="line">			<span class="string">&lt;snapshots&gt;</span></span><br><span class="line">				<span class="string">&lt;enabled&gt;false&lt;/enabled&gt;</span></span><br><span class="line">			<span class="string">&lt;/snapshots&gt;</span></span><br><span class="line">		<span class="string">&lt;/repository&gt;</span></span><br><span class="line">	<span class="string">&lt;/repositories&gt;</span></span><br></pre></td></tr></table></figure>
 <p>application.yml</p>
