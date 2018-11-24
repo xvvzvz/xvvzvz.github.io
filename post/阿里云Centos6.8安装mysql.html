@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://zengzhi.net.cn">
-  <title>Archives: 2018/7 | zengzhi_blog</title>
+  <title>阿里云Centos6.8安装mysql | zengzhi_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="前端,js,jquery,javascript,layui,mui,java,python,大数据,git,svn,SpringBoot,SpringCloud,linux">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zengzhi_blog">
-<meta property="og:url" content="http://zengzhi.net.cn/archives/2018/07/index.html">
+  <meta name="description" content="一,查看Centos下是否已经安装mysql  输入命令：yum list installed | grep mysql 二，删除已经安装的mysql  输入命令:yum -y remove mysql 三，查看yum库中的mysql(非必需的,查看版本)  输入命令： yum list | grep mysql 四，从yum库中的安装mysql  输入命令: yum -y install mys">
+<meta name="keywords" content="前端,js,jquery,javascript,layui,mui,java,python,大数据,git,svn,SpringBoot,SpringCloud,linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里云Centos6.8安装mysql">
+<meta property="og:url" content="http://zengzhi.net.cn/post/阿里云Centos6.8安装mysql.html">
 <meta property="og:site_name" content="zengzhi_blog">
+<meta property="og:description" content="一,查看Centos下是否已经安装mysql  输入命令：yum list installed | grep mysql 二，删除已经安装的mysql  输入命令:yum -y remove mysql 三，查看yum库中的mysql(非必需的,查看版本)  输入命令： yum list | grep mysql 四，从yum库中的安装mysql  输入命令: yum -y install mys">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-17T08:45:42.687Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zengzhi_blog">
+<meta name="twitter:title" content="阿里云Centos6.8安装mysql">
+<meta name="twitter:description" content="一,查看Centos下是否已经安装mysql  输入命令：yum list installed | grep mysql 二，删除已经安装的mysql  输入命令:yum -y remove mysql 三，查看yum库中的mysql(非必需的,查看版本)  输入命令： yum list | grep mysql 四，从yum库中的安装mysql  输入命令: yum -y install mys">
   
     <link rel="alternative" href="/atom.xml" title="zengzhi_blog" type="application/atom+xml">
   
@@ -163,76 +167,211 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-阿里云Centos6.8安装mysql" class="article article-type-post " itemscope itemprop="blogPost">
   
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/post/多久学会编程.html" class="archive-article-date">
-  	<time datetime="2018-07-03T08:19:43.344Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/post/多久学会编程.html">十年学会编程</a>
+    <h1 class="article-title" itemprop="name">
+      阿里云Centos6.8安装mysql
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/post/jsp-servlet模拟登陆之bug.html" class="archive-article-date">
-  	<time datetime="2018-07-02T03:29:54.187Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-02</time>
+        
+        <a href="/post/阿里云Centos6.8安装mysql.html" class="archive-article-date">
+  	<time datetime="2018-10-20T13:23:54.620Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-20</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/post/jsp-servlet模拟登陆之bug.html">jsp-servlet模拟登陆之bug</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一-查看Centos下是否已经安装mysql"><a href="#一-查看Centos下是否已经安装mysql" class="headerlink" title="一,查看Centos下是否已经安装mysql"></a>一,查看Centos下是否已经安装mysql</h3><p>  输入命令：yum list installed | grep mysql</p>
+<h3 id="二，删除已经安装的mysql"><a href="#二，删除已经安装的mysql" class="headerlink" title="二，删除已经安装的mysql"></a>二，删除已经安装的mysql</h3><p>  输入命令:yum -y remove mysql</p>
+<h3 id="三，查看yum库中的mysql-非必需的-查看版本"><a href="#三，查看yum库中的mysql-非必需的-查看版本" class="headerlink" title="三，查看yum库中的mysql(非必需的,查看版本)"></a>三，查看yum库中的mysql(非必需的,查看版本)</h3><p>  输入命令： yum list | grep mysql</p>
+<h3 id="四，从yum库中的安装mysql"><a href="#四，从yum库中的安装mysql" class="headerlink" title="四，从yum库中的安装mysql"></a>四，从yum库中的安装mysql</h3><p>  输入命令: yum -y install mysql mysql-server mysql-devel</p>
+<h3 id="五，验证是否安装成功"><a href="#五，验证是否安装成功" class="headerlink" title="五，验证是否安装成功"></a>五，验证是否安装成功</h3><p>  输入命令：rpm -qi mysql-server</p>
+<h3 id="六，启动mysql服务"><a href="#六，启动mysql服务" class="headerlink" title="六，启动mysql服务"></a>六，启动mysql服务</h3><p>  输入命令： service mysqld start</p>
+<h3 id="七，进入mysql"><a href="#七，进入mysql" class="headerlink" title="七，进入mysql"></a>七，进入mysql</h3><p>  输入命令： mysql -u root</p>
+<a id="more"></a>
+<h3 id="八，设置root密码"><a href="#八，设置root密码" class="headerlink" title="八，设置root密码"></a>八，设置root密码</h3><p>启动mysql:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#service mysqld start</span><br></pre></td></tr></table></figure></p>
+<p>设置root密码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure></p>
+<p>登陆root账号:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure></p>
+<p>建立远程root用户<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &apos;root&apos;@&apos;%&apos; IDENTIFIED BY &apos;你设置的密码&apos; WITH GRANT OPTION;</span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure></p>
+<p>###设置utf-8<br>查看MySQL原本的源码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like &apos;character%&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>设置编码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">###  vi /etc/my.cnf</span><br></pre></td></tr></table></figure></p>
+<p>在my.cnf文件中添加如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">character-set-server=utf8 </span><br><span class="line">collation-server=utf8_general_ci </span><br><span class="line">sql_mode=&apos;NO_ENGINE_SUBSTITUTION&apos;</span><br><span class="line"></span><br><span class="line">[mysql]</span><br><span class="line">default-character-set = utf8</span><br><span class="line"></span><br><span class="line">[mysql.server]</span><br><span class="line">default-character-set = utf8</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[mysqld_safe]</span><br><span class="line">default-character-set = utf8</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[client]</span><br><span class="line">default-character-set = utf8</span><br></pre></td></tr></table></figure></p>
+<p><strong>重启mysql</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">### service mysqld restart</span><br></pre></td></tr></table></figure></p>
+<p><strong>再次查看编码：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">### mysql -uroot -p</span><br><span class="line">mysql&gt; show variables like &apos;character%&apos;;</span><br><span class="line">+--------------------------+----------------------------+</span><br><span class="line">| Variable_name | Value |</span><br><span class="line">+--------------------------+----------------------------+</span><br><span class="line">| character_set_client | utf8 |</span><br><span class="line">| character_set_connection | utf8 |</span><br><span class="line">| character_set_database | utf8 |</span><br><span class="line">| character_set_filesystem | binary |</span><br><span class="line">| character_set_results | utf8 |</span><br><span class="line">| character_set_server | utf8 |</span><br><span class="line">| character_set_system | utf8 |</span><br><span class="line">| character_sets_dir | /usr/share/mysql/charsets/ |</span><br><span class="line">+--------------------------+----------------------------+</span><br><span class="line">8 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢支持我买服务器<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixinpay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixinpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+	
+	<!-- 添加代码  -->
+	<span id="busuanzi_container_page_pv">
+	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+	<!-- 结束添加代码  -->
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://zengzhi.net.cn/post/阿里云Centos6.8安装mysql.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/post/Spring/springcloud_config分布式配置.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          springcloud_config分布式配置---通过git获取码云上的配置文件信息
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/post/markdown常用语法.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">markdown常用语法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-查看Centos下是否已经安装mysql"><span class="toc-number">1.</span> <span class="toc-text">一,查看Centos下是否已经安装mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二，删除已经安装的mysql"><span class="toc-number">2.</span> <span class="toc-text">二，删除已经安装的mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三，查看yum库中的mysql-非必需的-查看版本"><span class="toc-number">3.</span> <span class="toc-text">三，查看yum库中的mysql(非必需的,查看版本)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四，从yum库中的安装mysql"><span class="toc-number">4.</span> <span class="toc-text">四，从yum库中的安装mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五，验证是否安装成功"><span class="toc-number">5.</span> <span class="toc-text">五，验证是否安装成功</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六，启动mysql服务"><span class="toc-number">6.</span> <span class="toc-text">六，启动mysql服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七，进入mysql"><span class="toc-number">7.</span> <span class="toc-text">七，进入mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#八，设置root密码"><span class="toc-number">8.</span> <span class="toc-text">八，设置root密码</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -258,8 +397,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
