@@ -6,16 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://zengzhi.net.cn">
-  <title>zengzhi_blog</title>
+  <title>Spring IOC 容器源码分析 | zengzhi_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="前端,js,jquery,javascript,layui,mui,java,python,大数据,git,svn,SpringBoot,SpringCloud,linux">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zengzhi_blog">
-<meta property="og:url" content="http://zengzhi.net.cn/index.html">
+  <meta name="description" content="更新时间：2017-11-15 Spring 最重要的概念是 IOC 和 AOP，本篇文章其实就是要带领大家来分析下 Spring 的 IOC 容器。既然大家平时都要用到 Spring，怎么可以不好好了解 Spring 呢？阅读本文并不能让你成为 Spring 专家，不过一定有助于大家理解 Spring 的很多概念，帮助大家排查应用中和 Spring 相关的一些问题。 本文采用的源码版本是 4.3">
+<meta name="keywords" content="java,spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring IOC 容器源码分析">
+<meta property="og:url" content="http://zengzhi.net.cn/post/Spring/Spring-IOC源码解析.html">
 <meta property="og:site_name" content="zengzhi_blog">
+<meta property="og:description" content="更新时间：2017-11-15 Spring 最重要的概念是 IOC 和 AOP，本篇文章其实就是要带领大家来分析下 Spring 的 IOC 容器。既然大家平时都要用到 Spring，怎么可以不好好了解 Spring 呢？阅读本文并不能让你成为 Spring 专家，不过一定有助于大家理解 Spring 的很多概念，帮助大家排查应用中和 Spring 相关的一些问题。 本文采用的源码版本是 4.3">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://javadoop.com/blogimages/spring-context/1.png">
+<meta property="og:image" content="https://javadoop.com/blogimages/spring-context/2.png">
+<meta property="og:image" content="https://javadoop.com/blogimages/spring-context/3.png">
+<meta property="og:updated_time" content="2018-12-13T12:48:39.732Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zengzhi_blog">
+<meta name="twitter:title" content="Spring IOC 容器源码分析">
+<meta name="twitter:description" content="更新时间：2017-11-15 Spring 最重要的概念是 IOC 和 AOP，本篇文章其实就是要带领大家来分析下 Spring 的 IOC 容器。既然大家平时都要用到 Spring，怎么可以不好好了解 Spring 呢？阅读本文并不能让你成为 Spring 专家，不过一定有助于大家理解 Spring 的很多概念，帮助大家排查应用中和 Spring 相关的一些问题。 本文采用的源码版本是 4.3">
+<meta name="twitter:image" content="https://javadoop.com/blogimages/spring-context/1.png">
   
     <link rel="alternative" href="/atom.xml" title="zengzhi_blog" type="application/atom+xml">
   
@@ -163,17 +171,15 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-Spring/Spring-IOC源码解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Spring/Spring-IOC源码解析" class="article article-type-post " itemscope itemprop="blogPost">
   
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/post/Spring/Spring-IOC源码解析.html">Spring IOC 容器源码分析</a>
+    <h1 class="article-title" itemprop="name">
+      Spring IOC 容器源码分析
     </h1>
   
 
@@ -625,208 +631,36 @@
       
 
       
-    </div>
-    <div class="article-info article-info-index">
-	
-	<!-- 添加代码  -->
-	<span id="busuanzi_container_page_pv">
-	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-	<!-- 结束添加代码  -->
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">java,spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Spring//" class="article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/post/Spring/Spring-IOC源码解析.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢支持我买服务器<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixinpay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixinpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-notes/ceshi" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/post/notes/ceshi.html">测试</a>
-    </h1>
-  
-
-        
-        <a href="/post/notes/ceshi.html" class="archive-article-date">
-  	<time datetime="2018-11-23T11:43:31.597Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-	
-	<!-- 添加代码  -->
-	<span id="busuanzi_container_page_pv">
-	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-	<!-- 结束添加代码  -->
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/ceshi//" class="article-tag-list-link color1">ceshi</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/post/notes/ceshi.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Spring/springcloud_config分布式配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/post/Spring/springcloud_config分布式配置.html">springcloud_config分布式配置---通过git获取码云上的配置文件信息</a>
-    </h1>
-  
-
-        
-        <a href="/post/Spring/springcloud_config分布式配置.html" class="archive-article-date">
-  	<time datetime="2018-11-08T08:28:09.889Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>首先大部分公司是不会选择SpringCloud自带的Config分布式配置中心,因为他不符合中国人的习惯.</p>
-<p>国内比较出名的分布式配置中心: 携程的 apllo(阿波罗)和zookeeper</p>
-<p>不过了解SpringCloud生态，这个是一定要了解的</p>
-<p>接下来讲解SpringCloud自带的分布式配置中心Config的一个小案例：</p>
-<p>准备：配置好的eclipse 和 能上网的环境</p>
-<h3 id="一-处理码云这方面"><a href="#一-处理码云这方面" class="headerlink" title="一.处理码云这方面"></a>一.处理码云这方面</h3><p>首先我们可以注册一个码云账号</p>
-<p>然后在右上角创建一个项目</p>
-<p>然后填写一个.md文件</p>
-<p>接下来建立一个文件夹d_config(名字是随意的)</p>
-<p>在文件夹中先建立一个test-configclient-prd.properties—在文件中写入info=prd.baidu.com</p>
-<p>建立另一个文件夹test-configclient-sit.properties —在文件夹写入info=sit.baidu.com</p>
-<p>(这里有疑问先不管,看后面。)</p>
-<h3 id="二，在eclipse建立maven项目"><a href="#二，在eclipse建立maven项目" class="headerlink" title="二，在eclipse建立maven项目"></a>二，在eclipse建立maven项目</h3><pre><code>首先建立一个名称为spring-cloud-eureka-server的maven项目（用eureka作为配置中心）
-</code></pre><p>管理依赖:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&lt;parent&gt;</span></span><br><span class="line">		<span class="string">&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span></span><br><span class="line">		<span class="string">&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span></span><br><span class="line">		<span class="string">&lt;version&gt;2.0.1.RELEASE&lt;/version&gt;</span></span><br><span class="line">	<span class="string">&lt;/parent&gt;</span></span><br><span class="line">	<span class="string">&lt;!--</span> <span class="string">管理依赖</span> <span class="bullet">--&gt;</span></span><br><span class="line">	<span class="string">&lt;dependencyManagement&gt;</span></span><br><span class="line">		<span class="string">&lt;dependencies&gt;</span></span><br><span class="line">			<span class="string">&lt;dependency&gt;</span></span><br><span class="line">				<span class="string">&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span></span><br><span class="line">				<span class="string">&lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;</span></span><br><span class="line">				<span class="string">&lt;version&gt;Finchley.M7&lt;/version&gt;</span></span><br><span class="line">				<span class="string">&lt;type&gt;pom&lt;/type&gt;</span></span><br><span class="line">				<span class="string">&lt;scope&gt;import&lt;/scope&gt;</span></span><br><span class="line">			<span class="string">&lt;/dependency&gt;</span></span><br><span class="line">		<span class="string">&lt;/dependencies&gt;</span></span><br><span class="line">	<span class="string">&lt;/dependencyManagement&gt;</span></span><br><span class="line">	<span class="string">&lt;dependencies&gt;</span></span><br><span class="line">		<span class="string">&lt;!--SpringCloud</span> <span class="string">eureka-server</span> <span class="bullet">--&gt;</span></span><br><span class="line">		<span class="string">&lt;dependency&gt;</span></span><br><span class="line">			<span class="string">&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span></span><br><span class="line">			<span class="string">&lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;</span></span><br><span class="line">		<span class="string">&lt;/dependency&gt;</span></span><br><span class="line">	<span class="string">&lt;/dependencies&gt;</span></span><br><span class="line">	<span class="string">&lt;!--</span> <span class="string">注意：</span> <span class="string">这里必须要添加，</span> <span class="string">否者各种依赖有问题</span> <span class="bullet">--&gt;</span></span><br><span class="line">	<span class="string">&lt;repositories&gt;</span></span><br><span class="line">		<span class="string">&lt;repository&gt;</span></span><br><span class="line">			<span class="string">&lt;id&gt;spring-milestones&lt;/id&gt;</span></span><br><span class="line">			<span class="string">&lt;name&gt;Spring</span> <span class="string">Milestones&lt;/name&gt;</span></span><br><span class="line">			<span class="string">&lt;url&gt;https://repo.spring.io/libs-milestone&lt;/url&gt;</span></span><br><span class="line">			<span class="string">&lt;snapshots&gt;</span></span><br><span class="line">				<span class="string">&lt;enabled&gt;false&lt;/enabled&gt;</span></span><br><span class="line">			<span class="string">&lt;/snapshots&gt;</span></span><br><span class="line">		<span class="string">&lt;/repository&gt;</span></span><br><span class="line">	<span class="string">&lt;/repositories&gt;</span></span><br></pre></td></tr></table></figure>
-<p>application.yml</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###服务启动端口</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8080</span></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="comment">###eureka基本信息配置</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  instance:</span></span><br><span class="line"><span class="attr">    hostname:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    service-url:</span></span><br><span class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://127.0.0.1:$&#123;server.port&#125;/eureka/</span></span><br><span class="line"><span class="comment">###因为自己是注册中心，不需要注册自己</span></span><br><span class="line"><span class="attr">    register-with-eureka:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment">###因为自己是注册中心,不需要去检索服务信息</span></span><br><span class="line"><span class="attr">    fetch-registry:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<p>建立启动项</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package com.springcloud;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line">import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@SpringBootApplication</span><br><span class="line">@EnableEurekaServer</span><br><span class="line">public class SpringCloudEurekaApplication &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		//开启注册中心</span><br><span class="line">		SpringApplication.run(SpringCloudEurekaApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/post/Spring/springcloud_config分布式配置.html#more">more >></a>
-        
-      
-
       
     </div>
     <div class="article-info article-info-index">
@@ -863,16 +697,75 @@
 
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/post/Spring/springcloud_config分布式配置.html">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://zengzhi.net.cn/post/Spring/Spring-IOC源码解析.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/post/notes/ceshi.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">测试</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -887,486 +780,32 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-阿里云Centos6.8安装mysql" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/post/阿里云Centos6.8安装mysql.html">阿里云Centos6.8安装mysql</a>
-    </h1>
-  
-
-        
-        <a href="/post/阿里云Centos6.8安装mysql.html" class="archive-article-date">
-  	<time datetime="2018-10-20T13:23:54.620Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一-查看Centos下是否已经安装mysql"><a href="#一-查看Centos下是否已经安装mysql" class="headerlink" title="一,查看Centos下是否已经安装mysql"></a>一,查看Centos下是否已经安装mysql</h3><p>  输入命令：yum list installed | grep mysql</p>
-<h3 id="二，删除已经安装的mysql"><a href="#二，删除已经安装的mysql" class="headerlink" title="二，删除已经安装的mysql"></a>二，删除已经安装的mysql</h3><p>  输入命令:yum -y remove mysql</p>
-<h3 id="三，查看yum库中的mysql-非必需的-查看版本"><a href="#三，查看yum库中的mysql-非必需的-查看版本" class="headerlink" title="三，查看yum库中的mysql(非必需的,查看版本)"></a>三，查看yum库中的mysql(非必需的,查看版本)</h3><p>  输入命令： yum list | grep mysql</p>
-<h3 id="四，从yum库中的安装mysql"><a href="#四，从yum库中的安装mysql" class="headerlink" title="四，从yum库中的安装mysql"></a>四，从yum库中的安装mysql</h3><p>  输入命令: yum -y install mysql mysql-server mysql-devel</p>
-<h3 id="五，验证是否安装成功"><a href="#五，验证是否安装成功" class="headerlink" title="五，验证是否安装成功"></a>五，验证是否安装成功</h3><p>  输入命令：rpm -qi mysql-server</p>
-<h3 id="六，启动mysql服务"><a href="#六，启动mysql服务" class="headerlink" title="六，启动mysql服务"></a>六，启动mysql服务</h3><p>  输入命令： service mysqld start</p>
-<h3 id="七，进入mysql"><a href="#七，进入mysql" class="headerlink" title="七，进入mysql"></a>七，进入mysql</h3><p>  输入命令： mysql -u root</p>
-        
-          <a class="article-more-a" href="/post/阿里云Centos6.8安装mysql.html#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-	
-	<!-- 添加代码  -->
-	<span id="busuanzi_container_page_pv">
-	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-	<!-- 结束添加代码  -->
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/post/阿里云Centos6.8安装mysql.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#引言"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BeanFactory-简介"><span class="toc-number">2.</span> <span class="toc-text">BeanFactory 简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动过程分析"><span class="toc-number">3.</span> <span class="toc-text">启动过程分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建-Bean-容器前的准备工作"><span class="toc-number">3.1.</span> <span class="toc-text">创建 Bean 容器前的准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建-Bean-容器，加载并注册-Bean"><span class="toc-number">3.2.</span> <span class="toc-text">创建 Bean 容器，加载并注册 Bean</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BeanDefinition-接口定义"><span class="toc-number">3.2.1.</span> <span class="toc-text">BeanDefinition 接口定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#customizeBeanFactory"><span class="toc-number">3.2.2.</span> <span class="toc-text">customizeBeanFactory</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#加载-Bean-loadBeanDefinitions"><span class="toc-number">3.2.3.</span> <span class="toc-text">加载 Bean: loadBeanDefinitions</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#doRegisterBeanDefinitions："><span class="toc-number">3.2.3.1.</span> <span class="toc-text">doRegisterBeanDefinitions：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#processBeanDefinition-解析-bean-标签"><span class="toc-number">3.2.3.2.</span> <span class="toc-text">processBeanDefinition 解析 bean 标签</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#注册-Bean"><span class="toc-number">3.2.3.3.</span> <span class="toc-text">注册 Bean</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bean-容器实例化完成后"><span class="toc-number">3.3.</span> <span class="toc-text">Bean 容器实例化完成后</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#准备-Bean-容器-prepareBeanFactory"><span class="toc-number">3.4.</span> <span class="toc-text">准备 Bean 容器: prepareBeanFactory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化所有的-singleton-beans"><span class="toc-number">3.5.</span> <span class="toc-text">初始化所有的 singleton beans</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#preInstantiateSingletons"><span class="toc-number">3.5.1.</span> <span class="toc-text">preInstantiateSingletons</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#getBean"><span class="toc-number">3.5.2.</span> <span class="toc-text">getBean</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#创建-Bean"><span class="toc-number">3.5.3.</span> <span class="toc-text">创建 Bean</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#创建-Bean-实例"><span class="toc-number">3.5.3.1.</span> <span class="toc-text">创建 Bean 实例</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#bean-属性注入"><span class="toc-number">3.5.3.2.</span> <span class="toc-text">bean 属性注入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#initializeBean"><span class="toc-number">3.5.3.3.</span> <span class="toc-text">initializeBean</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附录"><span class="toc-number">4.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#id-和-name"><span class="toc-number">4.1.</span> <span class="toc-text">id 和 name</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置是否允许-Bean-覆盖、是否允许循环依赖"><span class="toc-number">4.2.</span> <span class="toc-text">配置是否允许 Bean 覆盖、是否允许循环依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#profile"><span class="toc-number">4.3.</span> <span class="toc-text">profile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工厂模式生成-Bean"><span class="toc-number">4.4.</span> <span class="toc-text">工厂模式生成 Bean</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FactoryBean"><span class="toc-number">4.5.</span> <span class="toc-text">FactoryBean</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化-Bean-的回调"><span class="toc-number">4.6.</span> <span class="toc-text">初始化 Bean 的回调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#销毁-Bean-的回调"><span class="toc-number">4.7.</span> <span class="toc-text">销毁 Bean 的回调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ConversionService"><span class="toc-number">4.8.</span> <span class="toc-text">ConversionService</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bean-继承"><span class="toc-number">4.9.</span> <span class="toc-text">Bean 继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法注入"><span class="toc-number">4.10.</span> <span class="toc-text">方法注入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#lookup-method"><span class="toc-number">4.10.1.</span> <span class="toc-text">lookup-method</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#replaced-method"><span class="toc-number">4.10.2.</span> <span class="toc-text">replaced-method</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BeanPostProcessor"><span class="toc-number">4.11.</span> <span class="toc-text">BeanPostProcessor</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
   
-    <article id="post-markdown常用语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/post/markdown常用语法.html">markdown常用语法</a>
-    </h1>
   
 
-        
-        <a href="/post/markdown常用语法.html" class="archive-article-date">
-  	<time datetime="2018-10-19T12:55:17.274Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一，标题"><a href="#一，标题" class="headerlink" title="一，标题"></a>一，标题</h3><p>​    一个#是一级标题，两个是二级标题</p>
-<blockquote>
-<p>实例</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#这是一级标题</span><br><span class="line"></span><br><span class="line">##这是二级标题</span><br><span class="line"></span><br><span class="line">###这是三级标题</span><br></pre></td></tr></table></figure>
-<h3 id="二-字体"><a href="#二-字体" class="headerlink" title="二,    字体"></a>二,    字体</h3><h4 id="加粗"><a href="#加粗" class="headerlink" title=".加粗"></a>.加粗</h4><p>加粗字体用*包起来</p>
-<blockquote>
-<p>实例</p>
-</blockquote>
-<p><strong>加粗字体</strong></p>
-<h4 id="斜体"><a href="#斜体" class="headerlink" title=".斜体"></a>.斜体</h4><p>倾斜的文字左右分别用一个一个* 包起来</p>
-<blockquote>
-<p>实例</p>
-</blockquote>
-<p><em>倾斜字体</em></p>
-<p>####.斜体加粗</p>
-<p>要倾斜和加粗文字左右分别用三个*包起来</p>
-<blockquote>
-<p>实例</p>
-</blockquote>
-<p><strong><em>倾斜加粗</em></strong></p>
-<h4 id="删除线"><a href="#删除线" class="headerlink" title="删除线"></a>删除线</h4><p>要加删除线的文字左右分别用两个~~包起来</p>
-<blockquote>
-<p>实例</p>
-</blockquote>
-<p><del>删除线实例</del></p>
-        
-          <a class="article-more-a" href="/post/markdown常用语法.html#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-	
-	<!-- 添加代码  -->
-	<span id="busuanzi_container_page_pv">
-	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-	<!-- 结束添加代码  -->
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/post/markdown常用语法.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-多久学会编程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/post/多久学会编程.html">十年学会编程</a>
-    </h1>
   
 
-        
-        <a href="/post/多久学会编程.html" class="archive-article-date">
-  	<time datetime="2018-07-03T08:19:43.344Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>转载自:<a href="https://liuyandong.com/2017/10/25/122/" target="_blank" rel="noopener">十年学会编程</a>  </p>
-<p>十年学会编程</p>
-<p>这篇文章已经有很多人翻译过了，我之所以再搞一次，首先是我觉得这文章真的很好，值得一搞再搞，其次，几乎所有的版本都漏掉了一些语句，我猜可能是英文版更新过，但是，中文版没有与时俱进，最后是我没有找到那种一段英文，一段翻译的版本。如果再有人在我的公众号里问我如何学习编程的话，我就可以把这个发给他了。</p>
-<p>Teach Yourself Programming in Ten Years<br>Peter NorviG<br>Why is everyone in such a rush？<br>为何每个人都急于求成?<br>Walk into any bookstore, and you’ll see how to Teach Yourself Java in 24 Hours alongside endless variations offering to teach C, SQL, Ruby, Algorithms, and so on in a few days or hours. The Amazon advanced search for [title: teach, yourself, hours, since: 2000 and found 512 such books. Of the top ten, nine are programming books (the other is about bookkeeping). Similar results come from replacing “teach yourself” with “learn” or “hours” with “days.”</p>
-<p>随便走进一家书店，都会看到类似《24小时学会Java》这样的书，旁边摆着的是大量诸如在几天，几小时之内学会C语言，SQL，Ruby以及算法这样的书。如果使用Amazon上的高级搜索，使用title: teach, yourself, hours, since: 2000这个关键字来搜索，将会返回512本书。最靠前的10本书中，有9本是编程的书（唯一的例外是一本记账的书）。如果把关键字”teach yourself”替换成”learn”，或者将”hours”替换成”days”，返回的结果大同小异。</p>
-<p>The conclusion is that either people are in a big rush to learn about programming, or that programming is somehow fabulously easier to learn than anything else. Felleisen et al. give a nod to this trend in their book How to Design Programs, when they say “Bad programming is easy. Idiots can learn it in 21 days, even if they are dummies.” The Abtruse Goose comic also had their take.</p>
-<p>很明显，人们在学习编程的时候喜欢大跃进，或者认为编程比起其它事情来，是小菜一碟的事。Felleisen在他的书《How to Design Program》里说：“编烂程一点也不难。傻瓜也可以在21天内学会，即使他们是傻逼。”在搞笑漫画网站Abtruse Goose也在这个漫画中表达了同样的看法。</p>
-<p>Let’s analyze what a title like Teach Yourself C++ in 24 Hours could mean:</p>
-<p>我们来看看类似《24小时自学C++》这种标题党，到底说的什么鬼东西：</p>
-<p>Teach Yourself: In 24 hours you won’t have time to write several significant programs, and learn from your successes and failures with them. You won’t have time to work with an experienced programmer and understand what it is like to live in a C++ environment. In short, you won’t have time to learn much. So the book can only be talking about a superficial familiarity, not a deep understanding. As Alexander Pope said, a little learning is a dangerous thing.<br>自学: 24小时之内，你没有时间写几个有意义的程序，也就无法从成功或失败中学到经验。24小时之内，你没有时间和一个有经验的程序员合作交流，也就无从理解使用C++编程的真实场景。简单来说，时间太短，你啥也学不到。因此，有这种干货标题的速成书，只是让你走马观花的瞧一下，绝非深入的理解。18世纪的英国诗人亚历山大·蒲柏[……1]曾说过：“一知半解”是一件危险的事情。[……1]：这个哥哥还给牛顿写了最出名的墓志铭之一：“自然和自然律隐没在黑暗中；上帝说，让牛顿去吧！遂一片光明。”<br>C++: In 24 hours you might be able to learn some of the syntax of C++ (if you already know another language), but you couldn’t learn much about how to use the language. In short, if you were, say, a Basic programmer, you could learn to write programs in the style of Basic using C++ syntax, but you couldn’t learn what C++ is actually good (and bad) for. So what’s the point? Alan Perlis once said: “A language that doesn’t affect the way you think about programming, is not worth knowing”. One possible point is that you have to learn a tiny bit of C++ (or more likely, something like JavaScript or Processing) because you need to interface with an existing tool to accomplish a specific task. But then you’re not learning how to program; you’re learning to accomplish that task.<br>C++: (如果你有一定的编程基础)，在24小时之内，能学会一些C++的语法，但是，仅此而已了。如果你以前是个Basic语言的程序员，你可以写一些语法是C++，但是风格是Basic的程序，但是，24小时之内，C++语言的精华或糟粕，你都学不到。重点是什么？(首界图灵奖得主)Alan Perlis曾说过：“不能影响你编程思维方式的语言，是不值得学习的。”一个更加可能的场景是，在工作中，你不得不学习C++（或者JavaScript，Processing之类）的一小部分，来调用一些原有的接口，完成某个特定的任务。这种情况下，表面上说是在学习如何编程，其实只是在应付一下手上的活。<br>in 24 Hours: Unfortunately, this is not enough, as the next section shows.<br>24小时内:很不幸，24小时太少了，原因下面告诉你。</p>
-        
-          <a class="article-more-a" href="/post/多久学会编程.html#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-	
-	<!-- 添加代码  -->
-	<span id="busuanzi_container_page_pv">
-	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-	<!-- 结束添加代码  -->
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/post/多久学会编程.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-jsp-servlet模拟登陆之bug" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/post/jsp-servlet模拟登陆之bug.html">jsp-servlet模拟登陆之bug</a>
-    </h1>
   
 
-        
-        <a href="/post/jsp-servlet模拟登陆之bug.html" class="archive-article-date">
-  	<time datetime="2018-07-02T03:29:54.187Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>错误永远不是一道坎</p>
-<h3 id="出现的错误"><a href="#出现的错误" class="headerlink" title="出现的错误"></a>出现的错误</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">http:status 500   服务区内部错误  </span><br><span class="line">显示在Login_01Servlet.java 文件逻辑判断账号和密码一行 </span><br><span class="line">显示空指针异常  </span><br><span class="line">if(username.equals(&quot;admin&quot;))&#123;</span><br><span class="line">    。。。。。。</span><br><span class="line">&#125;</span><br><span class="line">username 是通过request.getParameter(&quot;username&quot;); 获取的</span><br><span class="line">username传过来本就是一个null  .equals()就会爆出空指针异常</span><br></pre></td></tr></table></figure>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">把逻辑判断语句if  改为</span><br><span class="line">if(&quot;admin&quot;.equals(username))&#123;</span><br><span class="line">	。。。。。。</span><br><span class="line">&#125;</span><br><span class="line">就可以了</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/post/jsp-servlet模拟登陆之bug.html#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-	
-	<!-- 添加代码  -->
-	<span id="busuanzi_container_page_pv">
-	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-	<!-- 结束添加代码  -->
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/post/jsp-servlet模拟登陆之bug.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-文件上传之git命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/post/文件上传之git命令.html">文件上传之git命令</a>
-    </h1>
-  
-
-        
-        <a href="/post/文件上传之git命令.html" class="archive-article-date">
-  	<time datetime="2018-06-30T05:19:38.508Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="first"><a href="#first" class="headerlink" title="first"></a>first</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在source/_posts目录下写一个或者copy一个*.md文件（这个*.md文件里面就是要上传的内容）</span><br></pre></td></tr></table></figure>
-<h3 id="second"><a href="#second" class="headerlink" title="second"></a>second</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">然后在hexo目录下右键选中Git Bash Here 进入git页面,在里面输入命令：hexo g (产生静态文件)</span><br><span class="line">然后输入命令：hexo s (启动服务预览)</span><br></pre></td></tr></table></figure>
-<h3 id="third"><a href="#third" class="headerlink" title="third"></a>third</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">最后是将文件部署到github上去</span><br><span class="line">在git窗口中输入：hexo d(部署)</span><br></pre></td></tr></table></figure>
-<h3 id="firth"><a href="#firth" class="headerlink" title="firth"></a>firth</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果想下架某篇文章只需要在source/_posts目录下删除即可，在重新发布就可以了</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-	
-	<!-- 添加代码  -->
-	<span id="busuanzi_container_page_pv">
-	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-	<!-- 结束添加代码  -->
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/post/文件上传之git命令.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-关于文件上传乱码问题解决" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/post/关于文件上传乱码问题解决.html">关于文件上传乱码问题解决</a>
-    </h1>
-  
-
-        
-        <a href="/post/关于文件上传乱码问题解决.html" class="archive-article-date">
-  	<time datetime="2018-06-30T05:04:49.763Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>first<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">乱码由来：</span><br><span class="line">	是因为编码格式的问题</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">保存时用utf-8保存或者是用高级记事本打开用utf-8编码格式编写</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-	
-	<!-- 添加代码  -->
-	<span id="busuanzi_container_page_pv">
-	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-	<!-- 结束添加代码  -->
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/post/关于文件上传乱码问题解决.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -1392,8 +831,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
