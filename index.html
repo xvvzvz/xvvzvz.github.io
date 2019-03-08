@@ -60,9 +60,11 @@
 	        
 				<li><a href="/archives">目录</a></li>
 	        
-				<li><a href="/categories/ceshi">心得</a></li>
+				<li><a href="/categories/experience">心得</a></li>
 	        
 				<li><a href="/categories/Spring">Spring</a></li>
+	        
+				<li><a href="/categories/date-structrue">数据结构</a></li>
 	        
 			</ul>
 		</nav>
@@ -124,6 +126,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -142,13 +146,15 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 25%"><a href="/">主页</a></li>
+					<li style="width: 20%"><a href="/">主页</a></li>
 		        
-					<li style="width: 25%"><a href="/archives">目录</a></li>
+					<li style="width: 20%"><a href="/archives">目录</a></li>
 		        
-					<li style="width: 25%"><a href="/categories/ceshi">心得</a></li>
+					<li style="width: 20%"><a href="/categories/experience">心得</a></li>
 		        
-					<li style="width: 25%"><a href="/categories/Spring">Spring</a></li>
+					<li style="width: 20%"><a href="/categories/Spring">Spring</a></li>
+		        
+					<li style="width: 20%"><a href="/categories/date-structrue">数据结构</a></li>
 		        
 				</ul>
 			</nav>
@@ -164,6 +170,117 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-date-structrue/股票买卖的最佳时机" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/post/date-structrue/股票买卖的最佳时机.html">股票买卖的最佳时机</a>
+    </h1>
+  
+
+        
+        <a href="/post/date-structrue/股票买卖的最佳时机.html" class="archive-article-date">
+  	<time datetime="2019-03-08T11:02:24.551Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。</span><br><span class="line">注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>示例1：</p>
+<p>输入: [7,1,5,3,6,4]</p>
+<p>输出: 7</p>
+<p>解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。</p>
+<p>随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。</p>
+</blockquote>
+<blockquote>
+<p>示例2<br>输入: [1,2,3,4,5]<br>输出:0<br>解释: 不管再哪天买都会亏钱，最好的选择是不买</p>
+</blockquote>
+<p>###最初的解决过程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">首先我通过观察几个的数组，了解到从左往右看，只要左边的数比右边的低，就可以买入。</span><br><span class="line">----- 然后，判断买入后两天中谁的值要大一些，如果左边的大一些，就在这天把股票卖掉，再在明天买入，如果右边的大一些</span><br><span class="line">----------然后判断后面是否有值比它大一些，如果没有，就在这天把股票卖掉，如果有，就在大值那天卖掉</span><br></pre></td></tr></table></figure>
+<p>###实例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> profit = <span class="number">0</span>;</span><br><span class="line">      <span class="comment">//第一层循环</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; prices.length;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> first = prices[i];</span><br><span class="line">          <span class="comment">//第二层循环，判断与前者的大小</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span>;j &lt; prices.length;j++)&#123;</span><br><span class="line">                <span class="keyword">int</span> pro = <span class="number">0</span>;</span><br><span class="line">              <span class="comment">//判断大小，如果大，不适合买入，跳到下一天</span></span><br><span class="line">                <span class="keyword">if</span>(first &gt; prices[j])&#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(j != prices.length-<span class="number">1</span>)&#123;<span class="comment">//判断是否到了最后一天</span></span><br><span class="line">                            <span class="keyword">for</span>(<span class="keyword">int</span> s = j+<span class="number">1</span>;s &lt; prices.length;s++)&#123;<span class="comment">//</span></span><br><span class="line">                                <span class="keyword">if</span>(prices[j] &gt; prices[s])&#123;<span class="comment">//如果这天之后没有比这天大的值，就保存利润值，并跳出循环</span></span><br><span class="line">                                    pro= prices[j] - prices[i];</span><br><span class="line">                                    i = j;</span><br><span class="line">                                    <span class="keyword">break</span>;</span><br><span class="line">                                &#125;<span class="keyword">else</span>&#123;<span class="comment">//寻找后面的最大值，并算出利润值</span></span><br><span class="line">                                    <span class="keyword">if</span>(s == prices.length-<span class="number">1</span>)&#123;</span><br><span class="line">                                        pro = prices[s] - prices[i];</span><br><span class="line">                                        i = prices.length-<span class="number">1</span>;</span><br><span class="line">                                        <span class="keyword">break</span>;</span><br><span class="line">                                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(prices[s-<span class="number">1</span>] &lt; prices[s])&#123;</span><br><span class="line">                                        pro = prices[s] - prices[i] ;</span><br><span class="line">                                        j = s;</span><br><span class="line">                                    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                          </span><br><span class="line">                            profit += pro;</span><br><span class="line">                          </span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        pro = prices[j] - prices[i];</span><br><span class="line">                        profit += pro;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> profit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>显然这样很耗费时间，时间复杂度为O(n^3)，及耗费性能</p>
+<h3 id="优化算法"><a href="#优化算法" class="headerlink" title="优化算法"></a>优化算法</h3><p><em>尝试观察整体特征，画出图形后，可以清晰的看出，只要找出最低点，然后找出最高点，就可以算出最大利润了</em></p>
+<p>优化代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> profit = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt; prices.length-<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(prices[i]&lt; prices[i+<span class="number">1</span>])&#123;</span><br><span class="line">                profit += prices[i+<span class="number">1</span>] - prices[i];</span><br><span class="line">            &#125;</span><br><span class="line">           i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> profit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">不要局限于一个角度，要从不同角度分析问题。</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+	
+	<!-- 添加代码  -->
+	<span id="busuanzi_container_page_pv">
+	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+	<!-- 结束添加代码  -->
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/date-structrue//" class="article-tag-list-link color5">date-structrue</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/post/date-structrue/股票买卖的最佳时机.html">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-Spring/Spring-IOC源码解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   
@@ -316,7 +433,7 @@
 
 
   
-    <article id="post-notes/ceshi" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-experience/ceshi" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   
   <div class="article-inner">
     
@@ -324,12 +441,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/post/notes/ceshi.html">测试</a>
+      <a class="article-title" href="/post/experience/ceshi.html">测试</a>
     </h1>
   
 
         
-        <a href="/post/notes/ceshi.html" class="archive-article-date">
+        <a href="/post/experience/ceshi.html" class="archive-article-date">
   	<time datetime="2018-11-23T11:43:31.597Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-23</time>
 </a>
         
@@ -368,7 +485,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/ceshi//" class="article-tag-list-link color1">ceshi</a>
+        			<a href="/categories/experience//" class="article-tag-list-link color1">experience</a>
         		</li>
       		
 		</ul>
@@ -377,7 +494,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/post/notes/ceshi.html">展开全文 >></a>
+          <a class="article-more-a" href="/post/experience/ceshi.html">展开全文 >></a>
         </p>
       
 
@@ -1004,7 +1121,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Zengzhi_L
+    		&copy; 2019 Zengzhi_L
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1088,11 +1205,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java,spring</a>
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color2">java,spring</a>
               </li>
             
             <div class="clearfix"></div>
