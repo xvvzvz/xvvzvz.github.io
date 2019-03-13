@@ -66,6 +66,8 @@
 	        
 				<li><a href="/categories/date-structrue">数据结构</a></li>
 	        
+				<li><a href="/categories/python3">python3</a></li>
+	        
 			</ul>
 		</nav>
 		<nav class="header-smart-menu">
@@ -128,6 +130,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -146,15 +150,17 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 20%"><a href="/">主页</a></li>
+					<li style="width: 16.666666666666668%"><a href="/">主页</a></li>
 		        
-					<li style="width: 20%"><a href="/archives">目录</a></li>
+					<li style="width: 16.666666666666668%"><a href="/archives">目录</a></li>
 		        
-					<li style="width: 20%"><a href="/categories/experience">心得</a></li>
+					<li style="width: 16.666666666666668%"><a href="/categories/experience">心得</a></li>
 		        
-					<li style="width: 20%"><a href="/categories/Spring">Spring</a></li>
+					<li style="width: 16.666666666666668%"><a href="/categories/Spring">Spring</a></li>
 		        
-					<li style="width: 20%"><a href="/categories/date-structrue">数据结构</a></li>
+					<li style="width: 16.666666666666668%"><a href="/categories/date-structrue">数据结构</a></li>
+		        
+					<li style="width: 16.666666666666668%"><a href="/categories/python3">python3</a></li>
 		        
 				</ul>
 			</nav>
@@ -170,6 +176,101 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-python3/多进程-RuntimeError" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/post/python3/多进程-RuntimeError.html">多进程之运行时异常</a>
+    </h1>
+  
+
+        
+        <a href="/post/python3/多进程-RuntimeError.html" class="archive-article-date">
+  	<time datetime="2019-03-13T08:11:45.589Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###异常：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">RuntimeError: </span><br><span class="line">        An attempt has been made to start a new process before the</span><br><span class="line">        current process has finished its bootstrapping phase.</span><br><span class="line"></span><br><span class="line">        This probably means that you are <span class="keyword">not</span> using fork to start your</span><br><span class="line">        child processes <span class="keyword">and</span> you have forgotten to use the proper idiom</span><br><span class="line">        <span class="keyword">in</span> the main module:</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">                freeze_support()</span><br><span class="line">                ...</span><br><span class="line"></span><br><span class="line">        The <span class="string">"freeze_support()"</span> line can be omitted <span class="keyword">if</span> the program</span><br><span class="line">        <span class="keyword">is</span> <span class="keyword">not</span> going to be frozen to produce an executable.</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/post/python3/多进程-RuntimeError.html#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+	
+	<!-- 添加代码  -->
+	<span id="busuanzi_container_page_pv">
+	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+	<!-- 结束添加代码  -->
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/python3//" class="article-tag-list-link color3">python3</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/post/python3/多进程-RuntimeError.html">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-date-structrue/股票买卖的最佳时机" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   
@@ -205,14 +306,9 @@
 </blockquote>
 <p>###最初的解决过程：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">首先我通过观察几个的数组，了解到从左往右看，只要左边的数比右边的低，就可以买入。</span><br><span class="line">----- 然后，判断买入后两天中谁的值要大一些，如果左边的大一些，就在这天把股票卖掉，再在明天买入，如果右边的大一些</span><br><span class="line">----------然后判断后面是否有值比它大一些，如果没有，就在这天把股票卖掉，如果有，就在大值那天卖掉</span><br></pre></td></tr></table></figure>
-<p>###实例代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> profit = <span class="number">0</span>;</span><br><span class="line">      <span class="comment">//第一层循环</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; prices.length;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> first = prices[i];</span><br><span class="line">          <span class="comment">//第二层循环，判断与前者的大小</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span>;j &lt; prices.length;j++)&#123;</span><br><span class="line">                <span class="keyword">int</span> pro = <span class="number">0</span>;</span><br><span class="line">              <span class="comment">//判断大小，如果大，不适合买入，跳到下一天</span></span><br><span class="line">                <span class="keyword">if</span>(first &gt; prices[j])&#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(j != prices.length-<span class="number">1</span>)&#123;<span class="comment">//判断是否到了最后一天</span></span><br><span class="line">                            <span class="keyword">for</span>(<span class="keyword">int</span> s = j+<span class="number">1</span>;s &lt; prices.length;s++)&#123;<span class="comment">//</span></span><br><span class="line">                                <span class="keyword">if</span>(prices[j] &gt; prices[s])&#123;<span class="comment">//如果这天之后没有比这天大的值，就保存利润值，并跳出循环</span></span><br><span class="line">                                    pro= prices[j] - prices[i];</span><br><span class="line">                                    i = j;</span><br><span class="line">                                    <span class="keyword">break</span>;</span><br><span class="line">                                &#125;<span class="keyword">else</span>&#123;<span class="comment">//寻找后面的最大值，并算出利润值</span></span><br><span class="line">                                    <span class="keyword">if</span>(s == prices.length-<span class="number">1</span>)&#123;</span><br><span class="line">                                        pro = prices[s] - prices[i];</span><br><span class="line">                                        i = prices.length-<span class="number">1</span>;</span><br><span class="line">                                        <span class="keyword">break</span>;</span><br><span class="line">                                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(prices[s-<span class="number">1</span>] &lt; prices[s])&#123;</span><br><span class="line">                                        pro = prices[s] - prices[i] ;</span><br><span class="line">                                        j = s;</span><br><span class="line">                                    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                          </span><br><span class="line">                            profit += pro;</span><br><span class="line">                          </span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        pro = prices[j] - prices[i];</span><br><span class="line">                        profit += pro;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> profit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>显然这样很耗费时间，时间复杂度为O(n^3)，及耗费性能</p>
-<h3 id="优化算法"><a href="#优化算法" class="headerlink" title="优化算法"></a>优化算法</h3><p><em>尝试观察整体特征，画出图形后，可以清晰的看出，只要找出最低点，然后找出最高点，就可以算出最大利润了</em></p>
-<p>优化代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> profit = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i &lt; prices.length-<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(prices[i]&lt; prices[i+<span class="number">1</span>])&#123;</span><br><span class="line">                profit += prices[i+<span class="number">1</span>] - prices[i];</span><br><span class="line">            &#125;</span><br><span class="line">           i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> profit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">不要局限于一个角度，要从不同角度分析问题。</span><br></pre></td></tr></table></figure>
-
+        
+          <a class="article-more-a" href="/post/date-structrue/股票买卖的最佳时机.html#more">more >></a>
+        
       
 
       
@@ -1039,76 +1135,10 @@
 
 
   
-    <article id="post-关于文件上传乱码问题解决" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/post/关于文件上传乱码问题解决.html">关于文件上传乱码问题解决</a>
-    </h1>
-  
-
-        
-        <a href="/post/关于文件上传乱码问题解决.html" class="archive-article-date">
-  	<time datetime="2018-06-30T05:04:49.763Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>first<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">乱码由来：</span><br><span class="line">	是因为编码格式的问题</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">保存时用utf-8保存或者是用高级记事本打开用utf-8编码格式编写</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-	
-	<!-- 添加代码  -->
-	<span id="busuanzi_container_page_pv">
-	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-	<!-- 结束添加代码  -->
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/post/关于文件上传乱码问题解决.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -1203,6 +1233,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>

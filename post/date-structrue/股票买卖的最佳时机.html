@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="zengzhi_blog">
 <meta property="og:description" content="题目：12给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。  示例1： 输入: [7,1,5,3,6,4] 输出: 7 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-08T11:02:24.552Z">
+<meta property="og:updated_time" content="2019-03-08T12:04:46.071Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="股票买卖的最佳时机">
 <meta name="twitter:description" content="题目：12给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。注意：你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。  示例1： 输入: [7,1,5,3,6,4] 输出: 7 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易">
@@ -69,6 +69,8 @@
 				<li><a href="/categories/Spring">Spring</a></li>
 	        
 				<li><a href="/categories/date-structrue">数据结构</a></li>
+	        
+				<li><a href="/categories/python3">python3</a></li>
 	        
 			</ul>
 		</nav>
@@ -132,6 +134,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -150,15 +154,17 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 20%"><a href="/">主页</a></li>
+					<li style="width: 16.666666666666668%"><a href="/">主页</a></li>
 		        
-					<li style="width: 20%"><a href="/archives">目录</a></li>
+					<li style="width: 16.666666666666668%"><a href="/archives">目录</a></li>
 		        
-					<li style="width: 20%"><a href="/categories/experience">心得</a></li>
+					<li style="width: 16.666666666666668%"><a href="/categories/experience">心得</a></li>
 		        
-					<li style="width: 20%"><a href="/categories/Spring">Spring</a></li>
+					<li style="width: 16.666666666666668%"><a href="/categories/Spring">Spring</a></li>
 		        
-					<li style="width: 20%"><a href="/categories/date-structrue">数据结构</a></li>
+					<li style="width: 16.666666666666668%"><a href="/categories/date-structrue">数据结构</a></li>
+		        
+					<li style="width: 16.666666666666668%"><a href="/categories/python3">python3</a></li>
 		        
 				</ul>
 			</nav>
@@ -207,6 +213,7 @@
 </blockquote>
 <p>###最初的解决过程：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">首先我通过观察几个的数组，了解到从左往右看，只要左边的数比右边的低，就可以买入。</span><br><span class="line">----- 然后，判断买入后两天中谁的值要大一些，如果左边的大一些，就在这天把股票卖掉，再在明天买入，如果右边的大一些</span><br><span class="line">----------然后判断后面是否有值比它大一些，如果没有，就在这天把股票卖掉，如果有，就在大值那天卖掉</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>###实例代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxProfit</span><span class="params">(<span class="keyword">int</span>[] prices)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> profit = <span class="number">0</span>;</span><br><span class="line">      <span class="comment">//第一层循环</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; prices.length;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> first = prices[i];</span><br><span class="line">          <span class="comment">//第二层循环，判断与前者的大小</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = i+<span class="number">1</span>;j &lt; prices.length;j++)&#123;</span><br><span class="line">                <span class="keyword">int</span> pro = <span class="number">0</span>;</span><br><span class="line">              <span class="comment">//判断大小，如果大，不适合买入，跳到下一天</span></span><br><span class="line">                <span class="keyword">if</span>(first &gt; prices[j])&#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(j != prices.length-<span class="number">1</span>)&#123;<span class="comment">//判断是否到了最后一天</span></span><br><span class="line">                            <span class="keyword">for</span>(<span class="keyword">int</span> s = j+<span class="number">1</span>;s &lt; prices.length;s++)&#123;<span class="comment">//</span></span><br><span class="line">                                <span class="keyword">if</span>(prices[j] &gt; prices[s])&#123;<span class="comment">//如果这天之后没有比这天大的值，就保存利润值，并跳出循环</span></span><br><span class="line">                                    pro= prices[j] - prices[i];</span><br><span class="line">                                    i = j;</span><br><span class="line">                                    <span class="keyword">break</span>;</span><br><span class="line">                                &#125;<span class="keyword">else</span>&#123;<span class="comment">//寻找后面的最大值，并算出利润值</span></span><br><span class="line">                                    <span class="keyword">if</span>(s == prices.length-<span class="number">1</span>)&#123;</span><br><span class="line">                                        pro = prices[s] - prices[i];</span><br><span class="line">                                        i = prices.length-<span class="number">1</span>;</span><br><span class="line">                                        <span class="keyword">break</span>;</span><br><span class="line">                                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(prices[s-<span class="number">1</span>] &lt; prices[s])&#123;</span><br><span class="line">                                        pro = prices[s] - prices[i] ;</span><br><span class="line">                                        j = s;</span><br><span class="line">                                    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                          </span><br><span class="line">                            profit += pro;</span><br><span class="line">                          </span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        pro = prices[j] - prices[i];</span><br><span class="line">                        profit += pro;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> profit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>显然这样很耗费时间，时间复杂度为O(n^3)，及耗费性能</p>
@@ -344,6 +351,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/post/python3/多进程-RuntimeError.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          多进程之运行时异常
+        
+      </div>
+    </a>
   
   
     <a href="/post/Spring/Spring-IOC源码解析.html" id="article-nav-older" class="article-nav-link-wrap">
@@ -487,6 +503,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">java</a>
