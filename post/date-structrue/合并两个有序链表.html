@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="zengzhi_blog">
 <meta property="og:description" content="题目：1将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。  示例： 输入：1-&amp;gt;2-&amp;gt;4, 1-&amp;gt;3-&amp;gt;4输出：1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;4">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-15T13:35:15.271Z">
+<meta property="og:updated_time" content="2019-03-15T13:40:26.048Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="合并两个有序链表">
 <meta name="twitter:description" content="题目：1将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。  示例： 输入：1-&amp;gt;2-&amp;gt;4, 1-&amp;gt;3-&amp;gt;4输出：1-&amp;gt;1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;4">
@@ -54,7 +54,7 @@
 		  <h1 class="header-author"><a href="/">Zengzhi_L</a></h1>
 		</hgroup>
 		
-		<p class="header-subtitle">合作</p>
+		<p class="header-subtitle">暂定吧</p>
 		
 
 		<nav class="header-menu">
@@ -120,7 +120,7 @@
 			  <h1 class="header-author js-header-author">Zengzhi_L</h1>
 			</hgroup>
 			
-			<p class="header-subtitle"><i class="icon icon-quo-left"></i>合作<i class="icon icon-quo-right"></i></p>
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>暂定吧<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -342,6 +342,15 @@
   
 <nav id="article-nav">
   
+    <a href="/post/python3/ReadTimeoutError.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          ReadTimeoutError
+        
+      </div>
+    </a>
+  
   
     <a href="/post/python3/多进程-RuntimeError.html" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">多进程之运行时异常</div>
@@ -398,14 +407,38 @@
       </div>
       <footer id="footer">
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <span id="busuanzi_container_site_pv" style="font-size: 18px;">本站访问数<span id="busuanzi_value_site_pv"></span>次</span>
+            <span id="busuanzi_container_site_pv" style="font-size: 11px;">本站访问数<span id="busuanzi_value_site_pv"></span>次</span>
+
+			<span class="footer__copyright" id="busuanzi_container_site_pv" style="font-size: 11px;">
+			<div><span id="span_dt_dt"> </div></span>
+			<script language="javascript">
+			function show_date_time(){
+			window.setTimeout("show_date_time()", 1000);
+			BirthDay=new Date("6/10/2018 00:00:00");//这个日期是可以修改的
+			today=new Date();
+			timeold=(today.getTime()-BirthDay.getTime());//其实仅仅改了这里
+			sectimeold=timeold/1000
+			secondsold=Math.floor(sectimeold);
+			msPerDay=24*60*60*1000
+			e_daysold=timeold/msPerDay
+			daysold=Math.floor(e_daysold);
+			e_hrsold=(e_daysold-daysold)*24;
+			hrsold=Math.floor(e_hrsold);
+			e_minsold=(e_hrsold-hrsold)*60;
+			minsold=Math.floor((e_hrsold-hrsold)*60);
+			seconds=Math.floor((e_minsold-minsold)*60);
+			span_dt_dt.innerHTML="博客大大已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒 🐼 ";
+			}
+			show_date_time();
+			</script>
+ 		
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
     		&copy; 2019 Zengzhi_L
     	</div>
       	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      		<a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
     </div>
   </div>
@@ -486,10 +519,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java，算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">java,算法</a>
               </li>
              
@@ -498,35 +527,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">python,爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">java,spring</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java, 算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">python 爬虫</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java； 算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java 算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">-java -算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">python,爬虫</a>
               </li>
             
             <div class="clearfix"></div>

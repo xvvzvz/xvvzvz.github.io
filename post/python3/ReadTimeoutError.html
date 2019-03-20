@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://zengzhi.net.cn">
-  <title>关于文件上传乱码问题解决 | zengzhi_blog</title>
+  <title>ReadTimeoutError | zengzhi_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="first12乱码由来：	是因为编码格式的问题 1保存时用utf-8保存或者是用高级记事本打开用utf-8编码格式编写">
-<meta name="keywords" content="前端,js,jquery,javascript,layui,mui,java,python,大数据,git,svn,SpringBoot,SpringCloud,linux,算法">
+  <meta name="description" content="异常1pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host=&apos;files.pythonhosted.org&apos;, port=443): Read timed out.">
+<meta name="keywords" content="python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于文件上传乱码问题解决">
-<meta property="og:url" content="http://zengzhi.net.cn/post/关于文件上传乱码问题解决.html">
+<meta property="og:title" content="ReadTimeoutError">
+<meta property="og:url" content="http://zengzhi.net.cn/post/python3/ReadTimeoutError.html">
 <meta property="og:site_name" content="zengzhi_blog">
-<meta property="og:description" content="first12乱码由来：	是因为编码格式的问题 1保存时用utf-8保存或者是用高级记事本打开用utf-8编码格式编写">
+<meta property="og:description" content="异常1pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host=&apos;files.pythonhosted.org&apos;, port=443): Read timed out.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-30T05:23:53.006Z">
+<meta property="og:updated_time" content="2019-03-20T10:32:02.286Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于文件上传乱码问题解决">
-<meta name="twitter:description" content="first12乱码由来：	是因为编码格式的问题 1保存时用utf-8保存或者是用高级记事本打开用utf-8编码格式编写">
+<meta name="twitter:title" content="ReadTimeoutError">
+<meta name="twitter:description" content="异常1pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host=&apos;files.pythonhosted.org&apos;, port=443): Read timed out.">
   
     <link rel="alternative" href="/atom.xml" title="zengzhi_blog" type="application/atom+xml">
   
@@ -179,7 +179,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-关于文件上传乱码问题解决" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-python3/ReadTimeoutError" class="article article-type-post " itemscope itemprop="blogPost">
   
   <div class="article-inner">
     
@@ -187,21 +187,33 @@
         
   
     <h1 class="article-title" itemprop="name">
-      关于文件上传乱码问题解决
+      ReadTimeoutError
     </h1>
   
 
         
-        <a href="/post/关于文件上传乱码问题解决.html" class="archive-article-date">
-  	<time datetime="2018-06-30T05:04:49.763Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-30</time>
+        <a href="/post/python3/ReadTimeoutError.html" class="archive-article-date">
+  	<time datetime="2019-03-20T10:23:31.191Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>first<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">乱码由来：</span><br><span class="line">	是因为编码格式的问题</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">保存时用utf-8保存或者是用高级记事本打开用utf-8编码格式编写</span><br></pre></td></tr></table></figure>
+        <h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host=<span class="string">'files.pythonhosted.org'</span>, port=<span class="number">443</span>): Read timed out.</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<blockquote>
+<p>场景：</p>
+<p>在用pip下载模块的总是出现异常</p>
+</blockquote>
+<p>原因分析：</p>
+<blockquote>
+<p>在下载python库的时候，由于python源在国外，在国内防火墙的因素下，python包下载非常慢，查看pip文档的时候控制超时即可，具体参数为</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--default-timeout=<span class="number">100</span></span><br></pre></td></tr></table></figure>
+<p>后面的可以自己指定</p>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip --default-timeout=100 install aiohttp</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -246,7 +258,29 @@
 	<!-- 结束添加代码  -->
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/python3//" class="article-tag-list-link color3">python3</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -296,7 +330,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://zengzhi.net.cn/post/关于文件上传乱码问题解决.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://zengzhi.net.cn/post/python3/ReadTimeoutError.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -310,15 +344,11 @@
   
 <nav id="article-nav">
   
-    <a href="/post/文件上传之git命令.html" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          文件上传之git命令
-        
-      </div>
-    </a>
   
+    <a href="/post/date-structrue/合并两个有序链表.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">合并两个有序链表</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -343,7 +373,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#异常"><span class="toc-number">1.</span> <span class="toc-text">异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决"><span class="toc-number">2.</span> <span class="toc-text">解决</span></a></li></ol>
                     </div>
                 </span>
             </div>
