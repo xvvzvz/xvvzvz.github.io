@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://zengzhi.net.cn">
-  <title>Archives: 2019/3 | zengzhi_blog</title>
+  <title>Centos6.8搭建邮箱服务器 | zengzhi_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="前端,js,jquery,javascript,layui,mui,java,python,大数据,git,svn,SpringBoot,SpringCloud,linux,算法">
-<meta property="og:type" content="website">
-<meta property="og:title" content="zengzhi_blog">
-<meta property="og:url" content="http://zengzhi.net.cn/archives/2019/03/index.html">
+  <meta name="description" content="##开场白： 今天主要是闲的无聊，买的阿里云不能白白的浪费掉啊，就搭个邮件服务来玩，使用的是Postfix和Dovecot来搭建，用Foxmail客户端登陆测试收信没问题，但是发信不行，通过postfix日志查看总是提示超时，好像是阿里云官方禁止了25这个端口.如果你想搭建玩玩可以推荐。。。先了解几个email有关的名词：  MUA：用户代理端，即用户使用的写信、收信客户端软件 MTA：邮件传送端">
+<meta name="keywords" content="shell,linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos6.8搭建邮箱服务器">
+<meta property="og:url" content="http://zengzhi.net.cn/post/linux/Centos6.8搭建邮箱服务器.html">
 <meta property="og:site_name" content="zengzhi_blog">
+<meta property="og:description" content="##开场白： 今天主要是闲的无聊，买的阿里云不能白白的浪费掉啊，就搭个邮件服务来玩，使用的是Postfix和Dovecot来搭建，用Foxmail客户端登陆测试收信没问题，但是发信不行，通过postfix日志查看总是提示超时，好像是阿里云官方禁止了25这个端口.如果你想搭建玩玩可以推荐。。。先了解几个email有关的名词：  MUA：用户代理端，即用户使用的写信、收信客户端软件 MTA：邮件传送端">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-03-26T07:45:54.286Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zengzhi_blog">
+<meta name="twitter:title" content="Centos6.8搭建邮箱服务器">
+<meta name="twitter:description" content="##开场白： 今天主要是闲的无聊，买的阿里云不能白白的浪费掉啊，就搭个邮件服务来玩，使用的是Postfix和Dovecot来搭建，用Foxmail客户端登陆测试收信没问题，但是发信不行，通过postfix日志查看总是提示超时，好像是阿里云官方禁止了25这个端口.如果你想搭建玩玩可以推荐。。。先了解几个email有关的名词：  MUA：用户代理端，即用户使用的写信、收信客户端软件 MTA：邮件传送端">
   
     <link rel="alternative" href="/atom.xml" title="zengzhi_blog" type="application/atom+xml">
   
@@ -181,36 +185,148 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-linux/Centos6.8搭建邮箱服务器" class="article article-type-post " itemscope itemprop="blogPost">
   
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/post/linux/Centos6.8搭建邮箱服务器.html" class="archive-article-date">
-  	<time datetime="2019-03-26T07:39:07.306Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-26</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/post/linux/Centos6.8搭建邮箱服务器.html">Centos6.8搭建邮箱服务器</a>
+    <h1 class="article-title" itemprop="name">
+      Centos6.8搭建邮箱服务器
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/post/linux/Centos6.8搭建邮箱服务器.html" class="archive-article-date">
+  	<time datetime="2019-03-26T07:39:07.306Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##开场白：</p>
+<p>今天主要是闲的无聊，买的阿里云不能白白的浪费掉啊，就搭个邮件服务来玩，使用的是Postfix和Dovecot来搭建，用Foxmail客户端登陆测试收信没问题，但是发信不行，通过postfix日志查看总是提示超时，好像是阿里云官方禁止了25这个端口.如果你想搭建玩玩可以推荐。。。<br>先了解几个email有关的名词：</p>
+<ul>
+<li>MUA：用户代理端，即用户使用的写信、收信客户端软件</li>
+<li>MTA：邮件传送端，即常说的邮件服务器，用于转发、收取用户邮件。</li>
+<li>MDA：邮件代理端，相当于MUA和MTA的中间人，可用于过滤垃圾邮件。</li>
+<li>POP：邮局协议，用于MUA连接服务器收取用户邮件，通信端口110。</li>
+<li>IMOP：互联网应用协议，功能较POP多，通信端口143。</li>
+<li>SMTP：简单邮件传送协议，MUA连接MTA或MTA连接MTA发送邮件使用此协议，通信端口25。</li>
+</ul>
+<p>postfix正是提供MTA功能的开源软件，是用来收发邮件的，它没有web页面，所以要配合本地的MUA（类似于foxmail，outlook之类的软件）来进行可视化的邮件管理操作。<br>Dovecot 是一个开源的IMAP 和POP3 邮件服务器，支持Linux/Unix 系统。作为IMAP和POP3服务器，Dovecot为邮件用户代理(MUA)提供了一种访问服务器上存储的邮件的方法(简单理解为检测用户的合法性)。但是，<strong>Dovecot并不负责从其他邮件服务器接收邮件。Dovecot只是将已经存储在邮件服务器上的邮件通过MUA显示出来。</strong></p>
+<p>好了下面就开始干吧</p>
+<a id="more"></a>
+<h2 id="安装Postfix和Dovecot"><a href="#安装Postfix和Dovecot" class="headerlink" title="安装Postfix和Dovecot"></a>安装Postfix和Dovecot</h2><p>在安装之前，首先我们先卸载默认的sendmail（如果有的话），因为它是系统默认的MTA程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove sendmail</span><br></pre></td></tr></table></figure>
+<p>然后就可以安装了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install postfix</span><br><span class="line">yum install cyrus*</span><br></pre></td></tr></table></figure>
+<p>cyrus函数库为postfix的stmp提供安全的验证支持<br>修改MTA（默认邮件传输代理）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alternatives --config mta</span><br></pre></td></tr></table></figure>
+<p>检查一下是不是已经设置成功了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alternatives --display mta</span><br></pre></td></tr></table></figure>
+<p>第一行可以看到mta的状态。 例如：<code>mat - status is manual.</code><br>安装Dovecot：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install dovecot</span><br></pre></td></tr></table></figure>
+<h2 id="设置域名解析"><a href="#设置域名解析" class="headerlink" title="设置域名解析"></a>设置域名解析</h2><p>需要添加两条记录，如果要设置过滤垃圾邮件的规则的话，还要再加一条，关键字：SPF和TXT记录类型<br>设置后一段时间后才会生效，10几分钟吧</p>
+<table>
+<thead>
+<tr>
+<th>主机记录</th>
+<th>记录类型</th>
+<th>记录值</th>
+<th>MX优先级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@(不填即可，默认会给这个)</td>
+<td>MX</td>
+<td>mail.+域名</td>
+<td>10</td>
+</tr>
+<tr>
+<td>mail</td>
+<td>A</td>
+<td>服务器的公网IP</td>
+<td>-</td>
+</tr>
+<tr>
+<td>@</td>
+<td>TXT</td>
+<td>v=spf1mx-all</td>
+</tr>
+</tbody>
+</table>
+<p>下面再说说这两条记录的作用</p>
+<ul>
+<li>MX 记录<br>这是为邮件服务器专门设计的，用于指定负责处理发往收件人域名的邮件服务器，简单邮件传输协议（SMTP）会根据 MX 记录的值来决定邮件的路由过程。<br>比如用 Gmail 往 163 发邮件，因为不是一个域的，在“转发”的过程中需要根据收信人地址(@163.com)查找 DNS 以确定对方域的 IP ，这样才能正确的投递</li>
+<li>A 记录<br>这个是为了免登陆的，正常情况下，我们发邮件需要登陆自己的账户，那么 Gmail 往 163 进行“转发”也是在发邮件，这个过程显然不可能也要进行登陆，这就用到了 A 记录<br>Gmail 转发邮件时通过 ehlo 打招呼的时候表明自己的邮件服务器域，也就是类似 <code>mail.gmail.com</code> 这样的，就是指向发邮件的服务器；<br>对方(163)收到后进行确认，拿着这个地址查 DNS，找出对应的 IP，然后核对发送人是不是这个 IP，这样就可以确认发送人是服务器而不是个人用户，就不需要登陆了</li>
+</ul>
+<p>大型的邮件系统收信服务器和发信服务器不会是在一台物理服务器上，比如基本都是 <code>imap.gmail.com</code> 收信服务器；<code>smtp.gmail.com</code> 发信服务器；对应着协议，以及现在用的比较少的 POP3</p>
+<blockquote>
+<p>POP3 协议允许电子邮件客户端下载服务器上的邮件，但是在客户端的操作（如移动邮件、标记已读等），不会反馈到服务器上，比如通过客户端收取了邮箱中的3封邮件并移动到其他文件夹，邮箱服务器上的这些邮件是没有同时被移动的 。<br>而 IMAP 提供 webmail 与电子邮件客户端之间的双向通信，客户端的操作都会反馈到服务器上，对邮件进行的操作，服务器上的邮件也会做相应的动作。<br><a href="http://help.163.com/10/0203/13/5UJONJ4I00753VB8.html" target="_blank" rel="noopener">http://help.163.com/10/0203/13/5UJONJ4I00753VB8.html</a></p>
+</blockquote>
+<h2 id="配置Postfix"><a href="#配置Postfix" class="headerlink" title="配置Postfix"></a>配置Postfix</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/postfix/main.cf</span><br><span class="line"></span><br><span class="line">#大约在75行，postfix主机名，修改成你的域名 此项需要添加A记录并指向postfix所在主机公网IP</span><br><span class="line">myhostname = mail.+域名</span><br><span class="line"></span><br><span class="line">#大约在83行，后面为主机域名</span><br><span class="line">mydomain = 域名</span><br><span class="line"></span><br><span class="line">#大约在100行，设置postfix邮箱的域名后缀为$mydomain</span><br><span class="line">myorigin = $mydomain</span><br><span class="line"></span><br><span class="line">#大约在117行</span><br><span class="line">#指定postfix系统监听的网络接口</span><br><span class="line">#若注释或填入公网ip  服务器的25端口将对公网开放</span><br><span class="line">#默认值为all 即监听所有网络接口</span><br><span class="line">#此项指定localhost后 本机postfix就只能发邮件不能接收邮件</span><br><span class="line">inet_interfaces = all</span><br><span class="line"></span><br><span class="line">#大约在120行,指定网络协议</span><br><span class="line">inet_protocols = ipv4</span><br><span class="line"></span><br><span class="line">#大约在165行</span><br><span class="line">#指定postfix接收邮件时收件人的域名，换句话说，也就是你的postfix系统要接收什么样的邮件。</span><br><span class="line">#此项配置中$myhostname表示postfix接受@$myhostname为后缀的邮箱的邮件 逗号分割支持指多项</span><br><span class="line">#此项默认值使用myhostname</span><br><span class="line">mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain</span><br><span class="line"></span><br><span class="line">#大约在266行</span><br><span class="line">#指定你所在的网络的网络地址</span><br><span class="line">#这里我填的依次是公网IP、内网IP、本地IP</span><br><span class="line">#请依据实际情况修改</span><br><span class="line">mynetworks = 40.120.xxx.xxx, 10.200.xx.xxx, 127.0.0.1</span><br><span class="line"></span><br><span class="line">#大约在571行</span><br><span class="line">#指定MUA通过smtp连接postfix时返回的header头信息</span><br><span class="line">#原始配置附带有postfix版本号 去掉即可，此项酌情处理</span><br><span class="line">smtpd_banner = $myhostname ESMTP</span><br><span class="line"></span><br><span class="line">#SMTP Config  ,将下面的内容添加到文件尾部即可</span><br><span class="line"># 规定邮件最大尺寸为10M</span><br><span class="line">message_size_limit = 10485760</span><br><span class="line"># 规定收件箱最大容量为1G</span><br><span class="line">mailbox_size_limit = 1073741824</span><br><span class="line"># SMTP认证</span><br><span class="line">smtpd_sasl_type = dovecot</span><br><span class="line">smtpd_sasl_path = private/auth</span><br><span class="line">smtpd_sasl_auth_enable = yes</span><br><span class="line">smtpd_sasl_security_options = noanonymous</span><br><span class="line">smtpd_sasl_local_domain = $myhostname</span><br><span class="line">smtpd_recipient_restrictions = permit_mynetworks,permit_auth_destination,permit_sasl_authenticated,reject</span><br></pre></td></tr></table></figure>
+<p>修改好了之后使用<code>/etc/rc.d/init.d/postfix start 或者service postfix start</code>开启postfix<br>使用<code>chkconfig postfix on</code>将postfix开机启动。</p>
+<p><del>其中，myhostname 还有说是运行 hostname 命令返回的结果，如果不成功，可尝试</del></p>
+<h2 id="配置Dovecot"><a href="#配置Dovecot" class="headerlink" title="配置Dovecot"></a>配置Dovecot</h2><p>还是修改配置文件，注意要修改的文件比较多，跟着改即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/dovecot/dovecot.conf</span><br><span class="line"># 26行: 如果不使用IPv6，请修改为*</span><br><span class="line">listen = *</span><br><span class="line"></span><br><span class="line">vi /etc/dovecot/conf.d/10-auth.conf</span><br><span class="line"># 9行: 取消注释并修改</span><br><span class="line"># 是否允许在沒有 SSL/TLS 下以明码登录</span><br><span class="line">disable_plaintext_auth = no</span><br><span class="line"># 97行: 添加</span><br><span class="line">auth_mechanisms = plain login</span><br><span class="line"></span><br><span class="line">vi /etc/dovecot/conf.d/10-mail.conf</span><br><span class="line"># 30行: 取消注释并添加</span><br><span class="line">mail_location = maildir:~/Maildir</span><br><span class="line"></span><br><span class="line">vi /etc/dovecot/conf.d/10-master.conf</span><br><span class="line"># 88-90行: 取消注释并添加 Postfix smtp 验证</span><br><span class="line">unix_listener /var/spool/postfix/private/auth &#123;</span><br><span class="line">    mode = 0666</span><br><span class="line">    user = postfix</span><br><span class="line">    group = postfix</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 开启服务和加入开机启动</span><br><span class="line">/etc/rc.d/init.d/dovecot start</span><br><span class="line">chkconfig dovecot on</span><br></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>一切都弄好以后，就可以使用Foxmail等第三方软件来收发邮件了。<br>在这里需要说一下，<strong>系统用户就是邮件的用户</strong>，例如root，就是一个邮箱用户，邮箱是root@+域名，密码就是root的密码，所以需要创建用户，只要使用<code>useradd</code>创建用户，再使用passwd设置密码。<br>不建议使用root用户来测试，还是useradd一个admin用户比较好</p>
+<p>如果使用的是Foxmail，输入E-mail地址和密码后，选择接收服务器类型是IMAP，邮件账号是你的用户名（不是邮箱地址）<br>下面的IMAP和SMTP服务器保持默认的mail.+域名即可</p>
+<p>还有就是：一定别忘了开启服务器的相应的端口！比如基本的143和25端口，对应上面的两个服务<br>就可以了！</p>
+<p>##查看日志</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f /var/log/maillog</span><br></pre></td></tr></table></figure>
+<h2 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h2><ul>
+<li>启动 postfix 服务提示找不到？<br>试试 <code>service postfix start</code> 或者 <code>systemctl start postfix</code> ；<br>顺便可使用 <code>service postfix reload</code> 刷一下配置</li>
+<li>出现意外情况？查看日志<br>查看 <code>/var/log/maillog</code> 下的日志或许会有些帮助，然后放到 Google 上</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢支持我买服务器<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixinpay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixinpay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+	
+	<!-- 添加代码  -->
+	<span id="busuanzi_container_page_pv">
+	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+	<!-- 结束添加代码  -->
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -222,7 +338,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -235,213 +351,117 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://zengzhi.net.cn/post/linux/Centos6.8搭建邮箱服务器.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/post/python3/ReadTimeoutError.html" class="archive-article-date">
-  	<time datetime="2019-03-20T10:23:31.191Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-20</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/post/python3/ReadTimeoutError.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ReadTimeoutError</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/post/python3/ReadTimeoutError.html">ReadTimeoutError</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/python3//" class="article-tag-list-link color3">python3</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Postfix和Dovecot"><span class="toc-number">1.</span> <span class="toc-text">安装Postfix和Dovecot</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置域名解析"><span class="toc-number">2.</span> <span class="toc-text">设置域名解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置Postfix"><span class="toc-number">3.</span> <span class="toc-text">配置Postfix</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置Dovecot"><span class="toc-number">4.</span> <span class="toc-text">配置Dovecot</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-number">5.</span> <span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#相关问题"><span class="toc-number">6.</span> <span class="toc-text">相关问题</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/post/date-structrue/合并两个有序链表.html" class="archive-article-date">
-  	<time datetime="2019-03-15T12:20:26.202Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/post/date-structrue/合并两个有序链表.html">合并两个有序链表</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">java,算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/date-structrue//" class="article-tag-list-link color5">date-structrue</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/post/python3/多进程-RuntimeError.html" class="archive-article-date">
-  	<time datetime="2019-03-13T08:11:45.589Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/post/python3/多进程-RuntimeError.html">多进程之运行时异常</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">python,爬虫</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/python3//" class="article-tag-list-link color3">python3</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/post/date-structrue/股票买卖的最佳时机.html" class="archive-article-date">
-  	<time datetime="2019-03-08T11:02:24.551Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/post/date-structrue/股票买卖的最佳时机.html">股票买卖的最佳时机</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">java,算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/date-structrue//" class="article-tag-list-link color5">date-structrue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -491,8 +511,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
