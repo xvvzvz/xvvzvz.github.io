@@ -302,8 +302,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在一个web应用中验证码是一个常见的元素。不管是防止机器人还是爬虫都有一定的作用，我们是自己编写生产验证码的工具类，也可以使用一些比较方便的验证码工具。在网上收集一些资料之后，今天给大家介绍一下kaptcha的和springboot一起使用的简单例子。</p>
-<p>准备工作：</p>
+        <p>###开始</p>
+<p>在一个web应用中验证码是一个常见的元素。不管是防止机器人还是爬虫都有一定的作用，我们是自己编写生产验证码的工具类，也可以使用一些比较方便的验证码工具。在网上收集一些资料之后，今天给大家介绍一下kaptcha的和springboot一起使用的简单例子。</p>
+<p>###准备工作：</p>
 <p>1.你要有一个springboot的hello world的工程，并能正常运行。</p>
 <p>2.导入kaptcha的maven：</p>
 <pre><code>&lt;!-- https://mvnrepository.com/artifact/com.github.penggle/kaptcha --&gt;
@@ -312,26 +313,36 @@
     &lt;artifactId&gt;kaptcha&lt;/artifactId&gt;
     &lt;version&gt;2.3.2&lt;/version&gt;
 &lt;/dependency&gt;
-</code></pre><p>开始实验：<br>我们有两种方式在springboot中使用kaptcha</p>
+</code></pre><p>###开始实验：</p>
+<p>我们有两种方式在springboot中使用kaptcha</p>
 <p>第一种使用.xml的配置方式配置生成kaptcha的bean对象，在启动类上@ImportResource这个xml文件；在controller中注入其对象并使用</p>
 <p>第二种是把kaptcha作为工程的一个类，加上@component注解在返回kaptcha的方法中加上@Bean注解，再在controller中注入其对象。</p>
-<p>第一种方法：</p>
+<p>这里只介绍第一种方法,第二种方法可以自己摸索</p>
 <p>在resources中创建一个xxx.xml文件 如：</p>
-<p>mykaptcha.xml文件：</p>
-<p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;</p>
-<p><beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"><br>    <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha"><br>        <property name="config"><br>            <bean class="com.google.code.kaptcha.util.Config"><br>                <constructor-arg type="java.util.Properties"><br>                    <props><br>                        <prop key="kaptcha.border ">yes</prop><br>                            <prop key="kaptcha.border.color">105,179,90</prop><br>                            <prop key="kaptcha.textproducer.font.color">blue</prop><br>                            <prop key="kaptcha.image.width">100</prop><br>                            <prop key="kaptcha.image.height">50</prop><br>                            <prop key="kaptcha.textproducer.font.size">27</prop><br>                            <prop key="kaptcha.session.key">code</prop><br>                            <prop key="kaptcha.textproducer.char.length">4</prop><br>                            <prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop><br>                            <prop key="kaptcha.textproducer.char.string">0123456789ABCEFGHIJKLMNOPQRSTUVWXYZ</prop><br>                            <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.WaterRipple</prop><br>                            <prop key="kaptcha.noise.color">black</prop><br>                            <prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.DefaultNoise</prop><br>                            <prop key="kaptcha.background.clear.from">185,56,213</prop><br>                            <prop key="kaptcha.background.clear.to">white</prop><br>                            <prop key="kaptcha.textproducer.char.space">3</prop><br>                    </props><br>                </constructor-arg><br>            </bean><br>        </property><br>    </bean></beans></p>
-<p><br>在springboot启动类上引入这个文件</p>
-<p>@SpringBootApplication<br>@ImportResource(locations={“classpath:mykaptcha.xml”})<br>public class Application {</p>
-<pre><code>public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
-}
-</code></pre><p>}</p>
-<p>在controller中使用：</p>
+<p>####mykaptcha.xml文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"captchaProducer"</span> <span class="attr">class</span>=<span class="string">"com.google.code.kaptcha.impl.DefaultKaptcha"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"config"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.google.code.kaptcha.util.Config"</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">type</span>=<span class="string">"java.util.Properties"</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;<span class="name">props</span>&gt;</span></span><br><span class="line">                      <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span> = <span class="string">"kaptcha.border "</span>&gt;</span>yes<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                          <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"kaptcha.border.color"</span>&gt;</span>105,179,90<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                          <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"kaptcha.textproducer.font.color"</span>&gt;</span>blue<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                          <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"kaptcha.image.width"</span>&gt;</span>100<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                          <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"kaptcha.image.height"</span>&gt;</span>50<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                          <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"kaptcha.textproducer.font.size"</span>&gt;</span>27<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                          <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"kaptcha.session.key"</span>&gt;</span>code<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                          <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"kaptcha.textproducer.char.length"</span>&gt;</span>4<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                          <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"kaptcha.textproducer.font.names"</span>&gt;</span>宋体,楷体,微软雅黑<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                              <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"kaptcha.textproducer.char.string"</span>&gt;</span>0123456789ABCEFGHIJKLMNOPQRSTUVWXYZ<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                              <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"kaptcha.obscurificator.impl"</span>&gt;</span>com.google.code.kaptcha.impl.WaterRipple<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                              <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"kaptcha.noise.color"</span>&gt;</span>black<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                              <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"kaptcha.noise.impl"</span>&gt;</span>com.google.code.kaptcha.impl.DefaultNoise<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                          <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"kaptcha.background.clear.from"</span>&gt;</span>185,56,213<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                          <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"kaptcha.background.clear.to"</span>&gt;</span>white<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                          <span class="tag">&lt;<span class="name">prop</span> <span class="attr">key</span>=<span class="string">"kaptcha.textproducer.char.space"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">prop</span>&gt;</span></span><br><span class="line">                  <span class="tag">&lt;/<span class="name">props</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>####在springboot启动类上引入这个文件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@ImportResource</span>(locations=&#123;<span class="string">"classpath:mykaptcha.xml"</span>&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">      SpringApplication.run(Application.class, args);</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>####在controller中使用：</p>
 <pre><code>@Autowired
 DefaultKaptcha defaultKaptcha;
-</code></pre><p>……</p>
-<p>@RequestMapping(“/defaultKaptcha”)<br>    public void defaultKaptcha(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) throws Exception{<br>             byte[] captchaChallengeAsJpeg = null;<br>             ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();<br>             try {<br>             //生产验证码字符串并保存到session中<br>             String createText = defaultKaptcha.createText();<br>             httpServletRequest.getSession().setAttribute(“vrifyCode”, createText);<br>             //使用生产的验证码字符串返回一个BufferedImage对象并转为byte写入到byte数组中<br>             BufferedImage challenge = defaultKaptcha.createImage(createText);<br>             ImageIO.write(challenge, “jpg”, jpegOutputStream);<br>             } catch (IllegalArgumentException e) {<br>                 httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);<br>                 return;<br>             } </p>
-<pre><code>         //定义response输出类型为image/jpeg类型，使用response输出流输出图片的byte数组
+@RequestMapping(&quot;/defaultKaptcha&quot;)
+public void defaultKaptcha(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) throws Exception{
+         byte[] captchaChallengeAsJpeg = null;  
+         ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();  
+         try {  
+         //生产验证码字符串并保存到session中
+         String createText = defaultKaptcha.createText();
+         httpServletRequest.getSession().setAttribute(&quot;vrifyCode&quot;, createText);
+         //使用生产的验证码字符串返回一个BufferedImage对象并转为byte写入到byte数组中
+         BufferedImage challenge = defaultKaptcha.createImage(createText);
+         ImageIO.write(challenge, &quot;jpg&quot;, jpegOutputStream);
+         } catch (IllegalArgumentException e) {  
+             httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);  
+             return;  
+         } 
+
+         //定义response输出类型为image/jpeg类型，使用response输出流输出图片的byte数组
          captchaChallengeAsJpeg = jpegOutputStream.toByteArray();  
          httpServletResponse.setHeader(&quot;Cache-Control&quot;, &quot;no-store&quot;);  
          httpServletResponse.setHeader(&quot;Pragma&quot;, &quot;no-cache&quot;);  
@@ -343,7 +354,7 @@ DefaultKaptcha defaultKaptcha;
          responseOutputStream.flush();  
          responseOutputStream.close();  
 }
-</code></pre><p>验证的方法：</p>
+</code></pre><p>####验证的方法：</p>
 <pre><code>@RequestMapping(&quot;/imgvrifyControllerDefaultKaptcha&quot;)
 public ModelAndView imgvrifyControllerDefaultKaptcha(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse){
     ModelAndView andView = new ModelAndView();
@@ -361,9 +372,9 @@ public ModelAndView imgvrifyControllerDefaultKaptcha(HttpServletRequest httpServ
     }
     return andView;
 }
-</code></pre><p>模板html：</p>
-<p>&lt;!DOCTYPE html&gt;</p>
-<html><br><head lang="en"><br>    <meta charset="UTF-8"><br>    <title>hello</title><br></head><br><body><br>    <h1 th:text="${info}"><br>    <div><br>        <!-- <img alt="这是图片" src="/img/001.png"/> --><br>        <img alt="验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1" src="/post/Spring/defaultKaptcha"><br>    </div><br>    <form action="imgvrifyControllerDefaultKaptcha"><br>        <input type="text" name="vrifyCode"><br>        <input type="submit" value="提交"><br>    </form><br></h1></body><br></html>
+</code></pre><p>####模板html：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">th:text</span>=<span class="string">"$&#123;info&#125;"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- &lt;img alt="这是图片" src="/img/001.png"/&gt; --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">img</span> <span class="attr">alt</span>=<span class="string">"验证码"</span> <span class="attr">onclick</span> = <span class="string">"this.src='/defaultKaptcha?d='+new Date()*1"</span> <span class="attr">src</span>=<span class="string">"/defaultKaptcha"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"imgvrifyControllerDefaultKaptcha"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"vrifyCode"</span> /&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"提交"</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -382,7 +393,7 @@ public ModelAndView imgvrifyControllerDefaultKaptcha(HttpServletRequest httpServ
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
         		</li>
       		
 		</ul>
@@ -394,7 +405,7 @@ public ModelAndView imgvrifyControllerDefaultKaptcha(HttpServletRequest httpServ
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/spring//" class="article-tag-list-link color2">spring</a>
+        			<a href="/categories/Spring//" class="article-tag-list-link color2">Spring</a>
         		</li>
       		
 		</ul>
@@ -1030,7 +1041,7 @@ public ModelAndView imgvrifyControllerDefaultKaptcha(HttpServletRequest httpServ
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">java,spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">java,Spring</a>
         		</li>
       		
 		</ul>
@@ -1416,19 +1427,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java,算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">shell,linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
+                <a href="javascript:void(0)" class="js-tag color3">java,算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1437,6 +1440,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">python,爬虫</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java,Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
             
             <div class="clearfix"></div>
