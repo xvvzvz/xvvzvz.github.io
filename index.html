@@ -183,6 +183,256 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Spring/SpringBoot整合Redis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/post/Spring/SpringBoot整合Redis.html">SpringBoot整合Redis</a>
+    </h1>
+  
+
+        
+        <a href="/post/Spring/SpringBoot整合Redis.html" class="archive-article-date">
+  	<time datetime="2019-04-08T07:12:56.708Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">	<span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">relativePath</span>/&gt;</span> <span class="comment">&lt;!-- lookup parent from repository --&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.springboot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>redis-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>0.0.1-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">name</span>&gt;</span>SpringBoot-Redis<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">description</span>&gt;</span>Demo project for Spring Boot Redis<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">java.version</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">java.version</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.commons<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-pool2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">&lt;!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		</span><br><span class="line">	<span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="配置redis连接"><a href="#配置redis连接" class="headerlink" title="配置redis连接"></a>配置redis连接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># REDIS</span><br><span class="line"># 连接工厂使用的数据库索引</span><br><span class="line">spring.redis.database=0  </span><br><span class="line"># Redis主机地址</span><br><span class="line">spring.redis.host=localhost</span><br><span class="line"># Redis端口号</span><br><span class="line">spring.redis.port=6379  </span><br><span class="line"># Redis密码</span><br><span class="line">spring.redis.password=</span><br><span class="line"># 池在给定时间可以分配的最大连接数。</span><br><span class="line">spring.redis.lettuce.pool.max-active=8</span><br><span class="line"># 在池耗尽时，在抛出异常之前连接分配应阻塞的最长时间。</span><br><span class="line">spring.redis.lettuce.pool.max-wait=-1</span><br><span class="line"># 池中“最大”空闲连接数。</span><br><span class="line">spring.redis.lettuce.pool.max-idle=8</span><br><span class="line"># 池中“最小”空闲连接数。</span><br><span class="line">spring.redis.lettuce.pool.min-idle=0</span><br></pre></td></tr></table></figure>
+<h3 id="Redis-template序列化配置（使用注解配置）"><a href="#Redis-template序列化配置（使用注解配置）" class="headerlink" title="Redis template序列化配置（使用注解配置）"></a>Redis template序列化配置（使用注解配置）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.SpringBoot.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.CachingConfigurerSupport;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.EnableCaching;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.interceptor.KeyGenerator;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.RedisTemplate;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.serializer.RedisSerializer;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.serializer.StringRedisSerializer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.annotation.JsonAutoDetect;</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.annotation.PropertyAccessor;</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line"></span><br><span class="line"><span class="comment">//spring-data-redis的RedisTemplate&lt;K, V&gt;模板类在操作redis时默认使用JdkSerializationRedisSerializer来进行序列化，这种方式似乎会导致序列化出现乱码，需要修改序列化的方式，下面提供修改方法</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableCaching</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisConfig</span> <span class="keyword">extends</span> <span class="title">CachingConfigurerSupport</span></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> KeyGenerator <span class="title">keyGenerator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> KeyGenerator() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">generate</span><span class="params">(Object target, Method method, Object... params)</span> </span>&#123;</span><br><span class="line">                StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">                sb.append(target.getClass().getName());</span><br><span class="line">                sb.append(method.getName());</span><br><span class="line">                <span class="keyword">for</span> (Object obj : params) &#123;</span><br><span class="line">                    sb.append(obj.toString());</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> sb.toString();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span>(required = <span class="keyword">false</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRedisTemplate</span><span class="params">(RedisTemplate redisTemplate)</span> </span>&#123;</span><br><span class="line">        RedisSerializer stringSerializer = <span class="keyword">new</span> StringRedisSerializer();</span><br><span class="line">        redisTemplate.setKeySerializer(stringSerializer);</span><br><span class="line">        </span><br><span class="line">        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = <span class="keyword">new</span> Jackson2JsonRedisSerializer&lt;&gt;(Object.class);</span><br><span class="line"></span><br><span class="line">        ObjectMapper objectMapper = <span class="keyword">new</span> ObjectMapper();</span><br><span class="line">        objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line">        objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);</span><br><span class="line"></span><br><span class="line">        jackson2JsonRedisSerializer.setObjectMapper(objectMapper);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 设置value的序列化规则和 key的序列化规则</span></span><br><span class="line">        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);</span><br><span class="line">        redisTemplate.setHashKeySerializer(stringSerializer);</span><br><span class="line">        redisTemplate.setHashValueSerializer(stringSerializer);</span><br><span class="line">        <span class="keyword">this</span>.redisTemplate = redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="通过配置RedisService-来调用RedisTemplate"><a href="#通过配置RedisService-来调用RedisTemplate" class="headerlink" title="通过配置RedisService(来调用RedisTemplate)"></a>通过配置RedisService(来调用RedisTemplate)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.SpringBoot.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.*;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Logger logger = LoggerFactory.getLogger(RedisService.class);</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * set value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">set</span><span class="params">(<span class="keyword">final</span> String key, Object value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> result = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ValueOperations&lt;Serializable, Object&gt; operations = redisTemplate.opsForValue();</span><br><span class="line">            operations.set(key, value);</span><br><span class="line">            result = <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            logger.error(<span class="string">"set error: key &#123;&#125;, value &#123;&#125;"</span>,key,value,e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * set value with expireTime</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> expireTime</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">set</span><span class="params">(<span class="keyword">final</span> String key, Object value, Long expireTime)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> result = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ValueOperations&lt;Serializable, Object&gt; operations = redisTemplate.opsForValue();</span><br><span class="line">            operations.set(key, value);</span><br><span class="line">            redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);</span><br><span class="line">            result = <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            logger.error(<span class="string">"set error: key &#123;&#125;, value &#123;&#125;,expireTime &#123;&#125;"</span>,key,value,expireTime,e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">exists</span><span class="params">(<span class="keyword">final</span> String key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> redisTemplate.hasKey(key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">get</span><span class="params">(<span class="keyword">final</span> String key)</span> </span>&#123;</span><br><span class="line">        Object result = <span class="keyword">null</span>;</span><br><span class="line">        ValueOperations&lt;Serializable, Object&gt; operations = redisTemplate.opsForValue();</span><br><span class="line">        result = operations.get(key);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * remove single key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">final</span> String key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (exists(key)) &#123;</span><br><span class="line">            redisTemplate.delete(key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * batch delete</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> keys</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">final</span> String... keys)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (String key : keys) &#123;</span><br><span class="line">            remove(key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * batch delete with pattern</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> pattern</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removePattern</span><span class="params">(<span class="keyword">final</span> String pattern)</span> </span>&#123;</span><br><span class="line">        Set&lt;Serializable&gt; keys = redisTemplate.keys(pattern);</span><br><span class="line">        <span class="keyword">if</span> (keys.size() &gt; <span class="number">0</span>)</span><br><span class="line">            redisTemplate.delete(keys);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * hash set</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> hashKey</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hashSet</span><span class="params">(String key, Object hashKey, Object value)</span></span>&#123;</span><br><span class="line">        HashOperations&lt;String, Object, Object&gt; hash = redisTemplate.opsForHash();</span><br><span class="line">        hash.put(key,hashKey,value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * hash get</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> hashKey</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">hashGet</span><span class="params">(String key, Object hashKey)</span></span>&#123;</span><br><span class="line">        HashOperations&lt;String, Object, Object&gt;  hash = redisTemplate.opsForHash();</span><br><span class="line">        <span class="keyword">return</span> hash.get(key,hashKey);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  list push</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> k</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> v</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(String k,Object v)</span></span>&#123;</span><br><span class="line">        ListOperations&lt;String, Object&gt; list = redisTemplate.opsForList();</span><br><span class="line">        list.rightPush(k,v);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  list range</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> k</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> l</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> l1</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Object&gt; <span class="title">range</span><span class="params">(String k, <span class="keyword">long</span> l, <span class="keyword">long</span> l1)</span></span>&#123;</span><br><span class="line">        ListOperations&lt;String, Object&gt; list = redisTemplate.opsForList();</span><br><span class="line">        <span class="keyword">return</span> list.range(k,l,l1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  set add</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAdd</span><span class="params">(String key,Object value)</span></span>&#123;</span><br><span class="line">        SetOperations&lt;String, Object&gt; set = redisTemplate.opsForSet();</span><br><span class="line">        set.add(key,value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * set get</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Set&lt;Object&gt; <span class="title">setMembers</span><span class="params">(String key)</span></span>&#123;</span><br><span class="line">        SetOperations&lt;String, Object&gt; set = redisTemplate.opsForSet();</span><br><span class="line">        <span class="keyword">return</span> set.members(key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * ordered set add</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> scoure</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">zAdd</span><span class="params">(String key,Object value,<span class="keyword">double</span> scoure)</span></span>&#123;</span><br><span class="line">        ZSetOperations&lt;String, Object&gt; zset = redisTemplate.opsForZSet();</span><br><span class="line">        zset.add(key,value,scoure);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * rangeByScore</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> scoure</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> scoure1</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Set&lt;Object&gt; <span class="title">rangeByScore</span><span class="params">(String key,<span class="keyword">double</span> scoure,<span class="keyword">double</span> scoure1)</span></span>&#123;</span><br><span class="line">        ZSetOperations&lt;String, Object&gt; zset = redisTemplate.opsForZSet();</span><br><span class="line">        <span class="keyword">return</span> zset.rangeByScore(key, scoure, scoure1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="测试类-这个是调用RedisService来间接调用RedisTemplate"><a href="#测试类-这个是调用RedisService来间接调用RedisTemplate" class="headerlink" title="测试类(这个是调用RedisService来间接调用RedisTemplate)"></a>测试类(这个是调用RedisService来间接调用RedisTemplate)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.SpringBoot.RedisTest;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Assert;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringRunner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.SpringBoot.domain.User;</span><br><span class="line"><span class="keyword">import</span> com.SpringBoot.service.RedisService;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestRedisService</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> RedisService redisService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testString</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        redisService.set(<span class="string">"lzz"</span>, <span class="string">"ityouknow"</span>);</span><br><span class="line">        Assert.assertEquals(<span class="string">"ityouknow"</span>, redisService.get(<span class="string">"lzz"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testObj</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        User user=<span class="keyword">new</span> User(<span class="string">"lzz@126.com"</span>, <span class="string">"smile"</span>, <span class="string">"youknow"</span>, <span class="string">"know"</span>,<span class="string">"2020"</span>);</span><br><span class="line">        redisService.set(<span class="string">"user"</span>,user);</span><br><span class="line">        User userR=(User) redisService.get(<span class="string">"user"</span>);</span><br><span class="line">        System.out.println(<span class="string">"userR== "</span>+userR.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>###直接调用RedisTemplate来操作Redis</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.SpringBoot.RedisTest;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Assert;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.*;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringRunner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.SpringBoot.domain.User;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSpringBootTemplate</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testString</span><span class="params">()</span>  </span>&#123;</span><br><span class="line">        redisTemplate.opsForValue().set(<span class="string">"neo"</span>, <span class="string">"ityouknow"</span>);</span><br><span class="line">        redisTemplate.opsForValue().set(<span class="string">"neo"</span>, <span class="string">"hello"</span>);</span><br><span class="line">        Assert.assertEquals(<span class="string">"hello"</span>, redisTemplate.opsForValue().get(<span class="string">"neo"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testObj</span><span class="params">()</span></span>&#123;</span><br><span class="line">        User user=<span class="keyword">new</span> User(<span class="string">"ityouknow@126.com"</span>, <span class="string">"smile"</span>, <span class="string">"youknow"</span>, <span class="string">"know"</span>,<span class="string">"2020"</span>);</span><br><span class="line">        ValueOperations&lt;String, User&gt; operations=redisTemplate.opsForValue();</span><br><span class="line">        operations.set(<span class="string">"com.neo"</span>, user);</span><br><span class="line">        User u=operations.get(<span class="string">"com.neo"</span>);</span><br><span class="line">        System.out.println(<span class="string">"user: "</span>+u.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testExpire</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        User user=<span class="keyword">new</span> User(<span class="string">"ityouknow@126.com"</span>, <span class="string">"expire"</span>, <span class="string">"youknow"</span>, <span class="string">"expire"</span>,<span class="string">"2020"</span>);</span><br><span class="line">        ValueOperations&lt;String, User&gt; operations=redisTemplate.opsForValue();</span><br><span class="line">        operations.set(<span class="string">"expire"</span>, user,<span class="number">100</span>,TimeUnit.MILLISECONDS);</span><br><span class="line">        Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">        <span class="keyword">boolean</span> exists=redisTemplate.hasKey(<span class="string">"expire"</span>);</span><br><span class="line">        <span class="keyword">if</span>(exists)&#123;</span><br><span class="line">            System.out.println(<span class="string">"exists is true"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"exists is false"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testDelete</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ValueOperations&lt;String, User&gt; operations=redisTemplate.opsForValue();</span><br><span class="line">        redisTemplate.opsForValue().set(<span class="string">"deletekey"</span>, <span class="string">"ityouknow"</span>);</span><br><span class="line">        redisTemplate.delete(<span class="string">"deletekey"</span>);</span><br><span class="line">        <span class="keyword">boolean</span> exists=redisTemplate.hasKey(<span class="string">"deletekey"</span>);</span><br><span class="line">        <span class="keyword">if</span>(exists)&#123;</span><br><span class="line">            System.out.println(<span class="string">"exists is true"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"exists is false"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testHash</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        HashOperations&lt;String, Object, Object&gt; hash = redisTemplate.opsForHash();</span><br><span class="line">        hash.put(<span class="string">"hash"</span>,<span class="string">"you"</span>,<span class="string">"you"</span>);</span><br><span class="line">        String value=(String) hash.get(<span class="string">"hash"</span>,<span class="string">"you"</span>);</span><br><span class="line">        System.out.println(<span class="string">"hash value :"</span>+value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String key=<span class="string">"list"</span>;</span><br><span class="line">        redisTemplate.delete(key);</span><br><span class="line">        ListOperations&lt;String, String&gt; list = redisTemplate.opsForList();</span><br><span class="line">        list.leftPush(key,<span class="string">"it"</span>);</span><br><span class="line">        list.leftPush(key,<span class="string">"you"</span>);</span><br><span class="line">        list.leftPush(key,<span class="string">"know"</span>);</span><br><span class="line">        String value=(String)list.leftPop(key);</span><br><span class="line">        System.out.println(<span class="string">"list value :"</span>+value.toString());</span><br><span class="line"></span><br><span class="line">       List&lt;String&gt; values=list.range(key,<span class="number">0</span>,<span class="number">3</span>);</span><br><span class="line">       <span class="keyword">for</span> (String v:values)&#123;</span><br><span class="line">           System.out.println(<span class="string">"list range :"</span>+v);</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        String key=<span class="string">"set"</span>;</span><br><span class="line">        redisTemplate.delete(key);</span><br><span class="line">        SetOperations&lt;String, String&gt; set = redisTemplate.opsForSet();</span><br><span class="line">        set.add(key,<span class="string">"it"</span>);</span><br><span class="line">        set.add(key,<span class="string">"you"</span>);</span><br><span class="line">        set.add(key,<span class="string">"you"</span>);</span><br><span class="line">        set.add(key,<span class="string">"know"</span>);</span><br><span class="line">        Set&lt;String&gt; values=set.members(key);</span><br><span class="line">        <span class="keyword">for</span> (String v:values)&#123;</span><br><span class="line">            System.out.println(<span class="string">"set value :"</span>+v);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSetMore</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        SetOperations&lt;String, String&gt; set = redisTemplate.opsForSet();</span><br><span class="line">        String key1=<span class="string">"setMore1"</span>;</span><br><span class="line">        String key2=<span class="string">"setMore2"</span>;</span><br><span class="line">        set.add(key1,<span class="string">"it"</span>);</span><br><span class="line">        set.add(key1,<span class="string">"you"</span>);</span><br><span class="line">        set.add(key1,<span class="string">"you"</span>);</span><br><span class="line">        set.add(key1,<span class="string">"know"</span>);</span><br><span class="line">        set.add(key2,<span class="string">"xx"</span>);</span><br><span class="line">        set.add(key2,<span class="string">"know"</span>);</span><br><span class="line">        Set&lt;String&gt; diffs=set.difference(key1,key2);</span><br><span class="line">        <span class="keyword">for</span> (String v:diffs)&#123;</span><br><span class="line">            System.out.println(<span class="string">"diffs set value :"</span>+v);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        String key3=<span class="string">"setMore3"</span>;</span><br><span class="line">        String key4=<span class="string">"setMore4"</span>;</span><br><span class="line">        set.add(key3,<span class="string">"it"</span>);</span><br><span class="line">        set.add(key3,<span class="string">"you"</span>);</span><br><span class="line">        set.add(key3,<span class="string">"xx"</span>);</span><br><span class="line">        set.add(key4,<span class="string">"aa"</span>);</span><br><span class="line">        set.add(key4,<span class="string">"bb"</span>);</span><br><span class="line">        set.add(key4,<span class="string">"know"</span>);</span><br><span class="line">        Set&lt;String&gt; unions=set.union(key3,key4);</span><br><span class="line">        <span class="keyword">for</span> (String v:unions)&#123;</span><br><span class="line">            System.out.println(<span class="string">"unions value :"</span>+v);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testZset</span><span class="params">()</span></span>&#123;</span><br><span class="line">        String key=<span class="string">"zset"</span>;</span><br><span class="line">        redisTemplate.delete(key);</span><br><span class="line">        ZSetOperations&lt;String, String&gt; zset = redisTemplate.opsForZSet();</span><br><span class="line">        zset.add(key,<span class="string">"it"</span>,<span class="number">1</span>);</span><br><span class="line">        zset.add(key,<span class="string">"you"</span>,<span class="number">6</span>);</span><br><span class="line">        zset.add(key,<span class="string">"know"</span>,<span class="number">4</span>);</span><br><span class="line">        zset.add(key,<span class="string">"neo"</span>,<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">        Set&lt;String&gt; zsets=zset.range(key,<span class="number">0</span>,<span class="number">3</span>);</span><br><span class="line">        <span class="keyword">for</span> (String v:zsets)&#123;</span><br><span class="line">            System.out.println(<span class="string">"zset value :"</span>+v);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Set&lt;String&gt; zsetB=zset.rangeByScore(key,<span class="number">0</span>,<span class="number">3</span>);</span><br><span class="line">        <span class="keyword">for</span> (String v:zsetB)&#123;</span><br><span class="line">            System.out.println(<span class="string">"zsetB value :"</span>+v);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+	
+	<!-- 添加代码  -->
+	<span id="busuanzi_container_page_pv">
+	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+	<!-- 结束添加代码  -->
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Spring//" class="article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/post/Spring/SpringBoot整合Redis.html">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Spring/SpringBoot整合验证码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/post/Spring/SpringBoot整合验证码.html">SpringBoot整合验证码</a>
+    </h1>
+  
+
+        
+        <a href="/post/Spring/SpringBoot整合验证码.html" class="archive-article-date">
+  	<time datetime="2019-04-05T07:21:48.465Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在一个web应用中验证码是一个常见的元素。不管是防止机器人还是爬虫都有一定的作用，我们是自己编写生产验证码的工具类，也可以使用一些比较方便的验证码工具。在网上收集一些资料之后，今天给大家介绍一下kaptcha的和springboot一起使用的简单例子。</p>
+<p>准备工作：</p>
+<p>1.你要有一个springboot的hello world的工程，并能正常运行。</p>
+<p>2.导入kaptcha的maven：</p>
+<pre><code>&lt;!-- https://mvnrepository.com/artifact/com.github.penggle/kaptcha --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.penggle&lt;/groupId&gt;
+    &lt;artifactId&gt;kaptcha&lt;/artifactId&gt;
+    &lt;version&gt;2.3.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>开始实验：<br>我们有两种方式在springboot中使用kaptcha</p>
+<p>第一种使用.xml的配置方式配置生成kaptcha的bean对象，在启动类上@ImportResource这个xml文件；在controller中注入其对象并使用</p>
+<p>第二种是把kaptcha作为工程的一个类，加上@component注解在返回kaptcha的方法中加上@Bean注解，再在controller中注入其对象。</p>
+<p>第一种方法：</p>
+<p>在resources中创建一个xxx.xml文件 如：</p>
+<p>mykaptcha.xml文件：</p>
+<p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;</p>
+<p><beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"><br>    <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha"><br>        <property name="config"><br>            <bean class="com.google.code.kaptcha.util.Config"><br>                <constructor-arg type="java.util.Properties"><br>                    <props><br>                        <prop key="kaptcha.border ">yes</prop><br>                            <prop key="kaptcha.border.color">105,179,90</prop><br>                            <prop key="kaptcha.textproducer.font.color">blue</prop><br>                            <prop key="kaptcha.image.width">100</prop><br>                            <prop key="kaptcha.image.height">50</prop><br>                            <prop key="kaptcha.textproducer.font.size">27</prop><br>                            <prop key="kaptcha.session.key">code</prop><br>                            <prop key="kaptcha.textproducer.char.length">4</prop><br>                            <prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop><br>                            <prop key="kaptcha.textproducer.char.string">0123456789ABCEFGHIJKLMNOPQRSTUVWXYZ</prop><br>                            <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.WaterRipple</prop><br>                            <prop key="kaptcha.noise.color">black</prop><br>                            <prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.DefaultNoise</prop><br>                            <prop key="kaptcha.background.clear.from">185,56,213</prop><br>                            <prop key="kaptcha.background.clear.to">white</prop><br>                            <prop key="kaptcha.textproducer.char.space">3</prop><br>                    </props><br>                </constructor-arg><br>            </bean><br>        </property><br>    </bean></beans></p>
+<p><br>在springboot启动类上引入这个文件</p>
+<p>@SpringBootApplication<br>@ImportResource(locations={“classpath:mykaptcha.xml”})<br>public class Application {</p>
+<pre><code>public static void main(String[] args) {
+    SpringApplication.run(Application.class, args);
+}
+</code></pre><p>}</p>
+<p>在controller中使用：</p>
+<pre><code>@Autowired
+DefaultKaptcha defaultKaptcha;
+</code></pre><p>……</p>
+<p>@RequestMapping(“/defaultKaptcha”)<br>    public void defaultKaptcha(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) throws Exception{<br>             byte[] captchaChallengeAsJpeg = null;<br>             ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();<br>             try {<br>             //生产验证码字符串并保存到session中<br>             String createText = defaultKaptcha.createText();<br>             httpServletRequest.getSession().setAttribute(“vrifyCode”, createText);<br>             //使用生产的验证码字符串返回一个BufferedImage对象并转为byte写入到byte数组中<br>             BufferedImage challenge = defaultKaptcha.createImage(createText);<br>             ImageIO.write(challenge, “jpg”, jpegOutputStream);<br>             } catch (IllegalArgumentException e) {<br>                 httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);<br>                 return;<br>             } </p>
+<pre><code>         //定义response输出类型为image/jpeg类型，使用response输出流输出图片的byte数组
+         captchaChallengeAsJpeg = jpegOutputStream.toByteArray();  
+         httpServletResponse.setHeader(&quot;Cache-Control&quot;, &quot;no-store&quot;);  
+         httpServletResponse.setHeader(&quot;Pragma&quot;, &quot;no-cache&quot;);  
+         httpServletResponse.setDateHeader(&quot;Expires&quot;, 0);  
+         httpServletResponse.setContentType(&quot;image/jpeg&quot;);  
+         ServletOutputStream responseOutputStream =  
+                 httpServletResponse.getOutputStream();  
+         responseOutputStream.write(captchaChallengeAsJpeg);  
+         responseOutputStream.flush();  
+         responseOutputStream.close();  
+}
+</code></pre><p>验证的方法：</p>
+<pre><code>@RequestMapping(&quot;/imgvrifyControllerDefaultKaptcha&quot;)
+public ModelAndView imgvrifyControllerDefaultKaptcha(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse){
+    ModelAndView andView = new ModelAndView();
+     String captchaId = (String) httpServletRequest.getSession().getAttribute(&quot;vrifyCode&quot;);  
+     String parameter = httpServletRequest.getParameter(&quot;vrifyCode&quot;);
+     System.out.println(&quot;Session  vrifyCode &quot;+captchaId+&quot; form vrifyCode &quot;+parameter);
+
+    if (!captchaId.equals(parameter)) {
+        andView.addObject(&quot;info&quot;, &quot;错误的验证码&quot;);
+        andView.setViewName(&quot;index&quot;);
+    } else {
+        andView.addObject(&quot;info&quot;, &quot;登录成功&quot;);
+        andView.setViewName(&quot;succeed&quot;);
+
+    }
+    return andView;
+}
+</code></pre><p>模板html：</p>
+<p>&lt;!DOCTYPE html&gt;</p>
+<html><br><head lang="en"><br>    <meta charset="UTF-8"><br>    <title>hello</title><br></head><br><body><br>    <h1 th:text="${info}"><br>    <div><br>        <!-- <img alt="这是图片" src="/img/001.png"/> --><br>        <img alt="验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1" src="/post/Spring/defaultKaptcha"><br>    </div><br>    <form action="imgvrifyControllerDefaultKaptcha"><br>        <input type="text" name="vrifyCode"><br>        <input type="submit" value="提交"><br>    </form><br></h1></body><br></html>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+	
+	<!-- 添加代码  -->
+	<span id="busuanzi_container_page_pv">
+	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+	<!-- 结束添加代码  -->
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/spring//" class="article-tag-list-link color2">spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/post/Spring/SpringBoot整合验证码.html">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-linux/Centos6.8搭建邮箱服务器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   
   <div class="article-inner">
@@ -1034,181 +1284,6 @@
 
 
   
-    <article id="post-阿里云Centos6.8安装mysql" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/post/阿里云Centos6.8安装mysql.html">阿里云Centos6.8安装mysql</a>
-    </h1>
-  
-
-        
-        <a href="/post/阿里云Centos6.8安装mysql.html" class="archive-article-date">
-  	<time datetime="2018-10-20T13:23:54.620Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一-查看Centos下是否已经安装mysql"><a href="#一-查看Centos下是否已经安装mysql" class="headerlink" title="一,查看Centos下是否已经安装mysql"></a>一,查看Centos下是否已经安装mysql</h3><p>  输入命令：yum list installed | grep mysql</p>
-<h3 id="二，删除已经安装的mysql"><a href="#二，删除已经安装的mysql" class="headerlink" title="二，删除已经安装的mysql"></a>二，删除已经安装的mysql</h3><p>  输入命令:yum -y remove mysql</p>
-<h3 id="三，查看yum库中的mysql-非必需的-查看版本"><a href="#三，查看yum库中的mysql-非必需的-查看版本" class="headerlink" title="三，查看yum库中的mysql(非必需的,查看版本)"></a>三，查看yum库中的mysql(非必需的,查看版本)</h3><p>  输入命令： yum list | grep mysql</p>
-<h3 id="四，从yum库中的安装mysql"><a href="#四，从yum库中的安装mysql" class="headerlink" title="四，从yum库中的安装mysql"></a>四，从yum库中的安装mysql</h3><p>  输入命令: yum -y install mysql mysql-server mysql-devel</p>
-<h3 id="五，验证是否安装成功"><a href="#五，验证是否安装成功" class="headerlink" title="五，验证是否安装成功"></a>五，验证是否安装成功</h3><p>  输入命令：rpm -qi mysql-server</p>
-<h3 id="六，启动mysql服务"><a href="#六，启动mysql服务" class="headerlink" title="六，启动mysql服务"></a>六，启动mysql服务</h3><p>  输入命令： service mysqld start</p>
-<h3 id="七，进入mysql"><a href="#七，进入mysql" class="headerlink" title="七，进入mysql"></a>七，进入mysql</h3><p>  输入命令： mysql -u root</p>
-        
-          <a class="article-more-a" href="/post/阿里云Centos6.8安装mysql.html#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-	
-	<!-- 添加代码  -->
-	<span id="busuanzi_container_page_pv">
-	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-	<!-- 结束添加代码  -->
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/post/阿里云Centos6.8安装mysql.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-markdown常用语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/post/markdown常用语法.html">markdown常用语法</a>
-    </h1>
-  
-
-        
-        <a href="/post/markdown常用语法.html" class="archive-article-date">
-  	<time datetime="2018-10-19T12:55:17.274Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一，标题"><a href="#一，标题" class="headerlink" title="一，标题"></a>一，标题</h3><p>​    一个#是一级标题，两个是二级标题</p>
-<blockquote>
-<p>实例</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#这是一级标题</span><br><span class="line"></span><br><span class="line">##这是二级标题</span><br><span class="line"></span><br><span class="line">###这是三级标题</span><br></pre></td></tr></table></figure>
-<h3 id="二-字体"><a href="#二-字体" class="headerlink" title="二,    字体"></a>二,    字体</h3><h4 id="加粗"><a href="#加粗" class="headerlink" title=".加粗"></a>.加粗</h4><p>加粗字体用*包起来</p>
-<blockquote>
-<p>实例</p>
-</blockquote>
-<p><strong>加粗字体</strong></p>
-<h4 id="斜体"><a href="#斜体" class="headerlink" title=".斜体"></a>.斜体</h4><p>倾斜的文字左右分别用一个一个* 包起来</p>
-<blockquote>
-<p>实例</p>
-</blockquote>
-<p><em>倾斜字体</em></p>
-<p>####.斜体加粗</p>
-<p>要倾斜和加粗文字左右分别用三个*包起来</p>
-<blockquote>
-<p>实例</p>
-</blockquote>
-<p><strong><em>倾斜加粗</em></strong></p>
-<h4 id="删除线"><a href="#删除线" class="headerlink" title="删除线"></a>删除线</h4><p>要加删除线的文字左右分别用两个~~包起来</p>
-<blockquote>
-<p>实例</p>
-</blockquote>
-<p><del>删除线实例</del></p>
-        
-          <a class="article-more-a" href="/post/markdown常用语法.html#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-	
-	<!-- 添加代码  -->
-	<span id="busuanzi_container_page_pv">
-	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-	<!-- 结束添加代码  -->
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/post/markdown常用语法.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1333,15 +1408,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">shell,linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1349,11 +1416,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">python,爬虫</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">java,算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">shell,linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">python,爬虫</a>
               </li>
             
             <div class="clearfix"></div>

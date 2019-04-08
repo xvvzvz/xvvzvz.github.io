@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://zengzhi.net.cn">
-  <title>ReadTimeoutError | zengzhi_blog</title>
+  <title>SpringBoot整合验证码 | zengzhi_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="异常1pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host=&apos;files.pythonhosted.org&apos;, port=443): Read timed out.">
-<meta name="keywords" content="python">
+  <meta name="description" content="在一个web应用中验证码是一个常见的元素。不管是防止机器人还是爬虫都有一定的作用，我们是自己编写生产验证码的工具类，也可以使用一些比较方便的验证码工具。在网上收集一些资料之后，今天给大家介绍一下kaptcha的和springboot一起使用的简单例子。 准备工作： 1.你要有一个springboot的hello world的工程，并能正常运行。 2.导入kaptcha的maven： &amp;lt;!--">
+<meta name="keywords" content="spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ReadTimeoutError">
-<meta property="og:url" content="http://zengzhi.net.cn/post/python3/ReadTimeoutError.html">
+<meta property="og:title" content="SpringBoot整合验证码">
+<meta property="og:url" content="http://zengzhi.net.cn/post/Spring/SpringBoot整合验证码.html">
 <meta property="og:site_name" content="zengzhi_blog">
-<meta property="og:description" content="异常1pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host=&apos;files.pythonhosted.org&apos;, port=443): Read timed out.">
+<meta property="og:description" content="在一个web应用中验证码是一个常见的元素。不管是防止机器人还是爬虫都有一定的作用，我们是自己编写生产验证码的工具类，也可以使用一些比较方便的验证码工具。在网上收集一些资料之后，今天给大家介绍一下kaptcha的和springboot一起使用的简单例子。 准备工作： 1.你要有一个springboot的hello world的工程，并能正常运行。 2.导入kaptcha的maven： &amp;lt;!--">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-20T10:38:45.993Z">
+<meta property="og:image" content="http://zengzhi.net.cn/post/Spring/defaultKaptcha">
+<meta property="og:updated_time" content="2019-04-05T15:17:52.817Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ReadTimeoutError">
-<meta name="twitter:description" content="异常1pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host=&apos;files.pythonhosted.org&apos;, port=443): Read timed out.">
+<meta name="twitter:title" content="SpringBoot整合验证码">
+<meta name="twitter:description" content="在一个web应用中验证码是一个常见的元素。不管是防止机器人还是爬虫都有一定的作用，我们是自己编写生产验证码的工具类，也可以使用一些比较方便的验证码工具。在网上收集一些资料之后，今天给大家介绍一下kaptcha的和springboot一起使用的简单例子。 准备工作： 1.你要有一个springboot的hello world的工程，并能正常运行。 2.导入kaptcha的maven： &amp;lt;!--">
+<meta name="twitter:image" content="http://zengzhi.net.cn/post/Spring/defaultKaptcha">
   
     <link rel="alternative" href="/atom.xml" title="zengzhi_blog" type="application/atom+xml">
   
@@ -185,7 +187,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-python3/ReadTimeoutError" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Spring/SpringBoot整合验证码" class="article article-type-post " itemscope itemprop="blogPost">
   
   <div class="article-inner">
     
@@ -193,33 +195,81 @@
         
   
     <h1 class="article-title" itemprop="name">
-      ReadTimeoutError
+      SpringBoot整合验证码
     </h1>
   
 
         
-        <a href="/post/python3/ReadTimeoutError.html" class="archive-article-date">
-  	<time datetime="2019-03-20T10:23:31.191Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-20</time>
+        <a href="/post/Spring/SpringBoot整合验证码.html" class="archive-article-date">
+  	<time datetime="2019-04-05T07:21:48.465Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host=<span class="string">'files.pythonhosted.org'</span>, port=<span class="number">443</span>): Read timed out.</span><br></pre></td></tr></table></figure>
-<a id="more"></a>
-<blockquote>
-<p>场景：</p>
-<p>在用pip下载模块的总是出现异常</p>
-</blockquote>
-<p>原因分析：</p>
-<blockquote>
-<p>在下载python库的时候，由于python源在国外，在国内防火墙的因素下，python包下载非常慢，查看pip文档的时候控制超时即可，具体参数为</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--default-timeout=<span class="number">100</span></span><br></pre></td></tr></table></figure>
-<p>后面的可以自己指定</p>
-<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip --default-timeout=100 install aiohttp</span><br></pre></td></tr></table></figure>
+        <p>在一个web应用中验证码是一个常见的元素。不管是防止机器人还是爬虫都有一定的作用，我们是自己编写生产验证码的工具类，也可以使用一些比较方便的验证码工具。在网上收集一些资料之后，今天给大家介绍一下kaptcha的和springboot一起使用的简单例子。</p>
+<p>准备工作：</p>
+<p>1.你要有一个springboot的hello world的工程，并能正常运行。</p>
+<p>2.导入kaptcha的maven：</p>
+<pre><code>&lt;!-- https://mvnrepository.com/artifact/com.github.penggle/kaptcha --&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.github.penggle&lt;/groupId&gt;
+    &lt;artifactId&gt;kaptcha&lt;/artifactId&gt;
+    &lt;version&gt;2.3.2&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>开始实验：<br>我们有两种方式在springboot中使用kaptcha</p>
+<p>第一种使用.xml的配置方式配置生成kaptcha的bean对象，在启动类上@ImportResource这个xml文件；在controller中注入其对象并使用</p>
+<p>第二种是把kaptcha作为工程的一个类，加上@component注解在返回kaptcha的方法中加上@Bean注解，再在controller中注入其对象。</p>
+<p>第一种方法：</p>
+<p>在resources中创建一个xxx.xml文件 如：</p>
+<p>mykaptcha.xml文件：</p>
+<p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;</p>
+<p><beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemalocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"><br>    <bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha"><br>        <property name="config"><br>            <bean class="com.google.code.kaptcha.util.Config"><br>                <constructor-arg type="java.util.Properties"><br>                    <props><br>                        <prop key="kaptcha.border ">yes</prop><br>                            <prop key="kaptcha.border.color">105,179,90</prop><br>                            <prop key="kaptcha.textproducer.font.color">blue</prop><br>                            <prop key="kaptcha.image.width">100</prop><br>                            <prop key="kaptcha.image.height">50</prop><br>                            <prop key="kaptcha.textproducer.font.size">27</prop><br>                            <prop key="kaptcha.session.key">code</prop><br>                            <prop key="kaptcha.textproducer.char.length">4</prop><br>                            <prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop><br>                            <prop key="kaptcha.textproducer.char.string">0123456789ABCEFGHIJKLMNOPQRSTUVWXYZ</prop><br>                            <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.WaterRipple</prop><br>                            <prop key="kaptcha.noise.color">black</prop><br>                            <prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.DefaultNoise</prop><br>                            <prop key="kaptcha.background.clear.from">185,56,213</prop><br>                            <prop key="kaptcha.background.clear.to">white</prop><br>                            <prop key="kaptcha.textproducer.char.space">3</prop><br>                    </props><br>                </constructor-arg><br>            </bean><br>        </property><br>    </bean></beans></p>
+<p><br>在springboot启动类上引入这个文件</p>
+<p>@SpringBootApplication<br>@ImportResource(locations={“classpath:mykaptcha.xml”})<br>public class Application {</p>
+<pre><code>public static void main(String[] args) {
+    SpringApplication.run(Application.class, args);
+}
+</code></pre><p>}</p>
+<p>在controller中使用：</p>
+<pre><code>@Autowired
+DefaultKaptcha defaultKaptcha;
+</code></pre><p>……</p>
+<p>@RequestMapping(“/defaultKaptcha”)<br>    public void defaultKaptcha(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse) throws Exception{<br>             byte[] captchaChallengeAsJpeg = null;<br>             ByteArrayOutputStream jpegOutputStream = new ByteArrayOutputStream();<br>             try {<br>             //生产验证码字符串并保存到session中<br>             String createText = defaultKaptcha.createText();<br>             httpServletRequest.getSession().setAttribute(“vrifyCode”, createText);<br>             //使用生产的验证码字符串返回一个BufferedImage对象并转为byte写入到byte数组中<br>             BufferedImage challenge = defaultKaptcha.createImage(createText);<br>             ImageIO.write(challenge, “jpg”, jpegOutputStream);<br>             } catch (IllegalArgumentException e) {<br>                 httpServletResponse.sendError(HttpServletResponse.SC_NOT_FOUND);<br>                 return;<br>             } </p>
+<pre><code>         //定义response输出类型为image/jpeg类型，使用response输出流输出图片的byte数组
+         captchaChallengeAsJpeg = jpegOutputStream.toByteArray();  
+         httpServletResponse.setHeader(&quot;Cache-Control&quot;, &quot;no-store&quot;);  
+         httpServletResponse.setHeader(&quot;Pragma&quot;, &quot;no-cache&quot;);  
+         httpServletResponse.setDateHeader(&quot;Expires&quot;, 0);  
+         httpServletResponse.setContentType(&quot;image/jpeg&quot;);  
+         ServletOutputStream responseOutputStream =  
+                 httpServletResponse.getOutputStream();  
+         responseOutputStream.write(captchaChallengeAsJpeg);  
+         responseOutputStream.flush();  
+         responseOutputStream.close();  
+}
+</code></pre><p>验证的方法：</p>
+<pre><code>@RequestMapping(&quot;/imgvrifyControllerDefaultKaptcha&quot;)
+public ModelAndView imgvrifyControllerDefaultKaptcha(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse){
+    ModelAndView andView = new ModelAndView();
+     String captchaId = (String) httpServletRequest.getSession().getAttribute(&quot;vrifyCode&quot;);  
+     String parameter = httpServletRequest.getParameter(&quot;vrifyCode&quot;);
+     System.out.println(&quot;Session  vrifyCode &quot;+captchaId+&quot; form vrifyCode &quot;+parameter);
 
+    if (!captchaId.equals(parameter)) {
+        andView.addObject(&quot;info&quot;, &quot;错误的验证码&quot;);
+        andView.setViewName(&quot;index&quot;);
+    } else {
+        andView.addObject(&quot;info&quot;, &quot;登录成功&quot;);
+        andView.setViewName(&quot;succeed&quot;);
+
+    }
+    return andView;
+}
+</code></pre><p>模板html：</p>
+<p>&lt;!DOCTYPE html&gt;</p>
+<html><br><head lang="en"><br>    <meta charset="UTF-8"><br>    <title>hello</title><br></head><br><body><br>    <h1 th:text="${info}"><br>    <div><br>        <!-- <img alt="这是图片" src="/img/001.png"/> --><br>        <img alt="验证码" onclick="this.src='/defaultKaptcha?d='+new Date()*1" src="/post/Spring/defaultKaptcha"><br>    </div><br>    <form action="imgvrifyControllerDefaultKaptcha"><br>        <input type="text" name="vrifyCode"><br>        <input type="submit" value="提交"><br>    </form><br></h1></body><br></html>
       
 
       
@@ -269,7 +319,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
         		</li>
       		
 		</ul>
@@ -281,7 +331,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/python3//" class="article-tag-list-link color3">python3</a>
+        			<a href="/categories/spring//" class="article-tag-list-link color2">spring</a>
         		</li>
       		
 		</ul>
@@ -336,7 +386,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://zengzhi.net.cn/post/python3/ReadTimeoutError.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://zengzhi.net.cn/post/Spring/SpringBoot整合验证码.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -350,18 +400,18 @@
   
 <nav id="article-nav">
   
-    <a href="/post/linux/Centos6.8搭建邮箱服务器.html" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/post/Spring/SpringBoot整合Redis.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Centos6.8搭建邮箱服务器
+          SpringBoot整合Redis
         
       </div>
     </a>
   
   
-    <a href="/post/date-structrue/合并两个有序链表.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">合并两个有序链表</div>
+    <a href="/post/linux/Centos6.8搭建邮箱服务器.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Centos6.8搭建邮箱服务器</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -388,7 +438,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#异常"><span class="toc-number">1.</span> <span class="toc-text">异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决"><span class="toc-number">2.</span> <span class="toc-text">解决</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">                                                </span></a></li></ol>
                     </div>
                 </span>
             </div>
