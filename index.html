@@ -191,40 +191,25 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/post/Spring/SpringBoot部署Centos.html">SpringBoot����Centos</a>
+      <a class="article-title" href="/post/Spring/SpringBoot部署Centos.html">SpringBoot部署Centos</a>
     </h1>
   
 
         
         <a href="/post/Spring/SpringBoot部署Centos.html" class="archive-article-date">
-  	<time datetime="2019-04-16T15:15:21.901Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-16</time>
+  	<time datetime="2019-04-28T11:28:04.267Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>���ȣ�</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- �Ƴ���Ƕ��tomcatģ�飬����Ϊ�������ڱ������Է��㣬���ǻ���Ҫ�������������������� --&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">			&lt;exclusions&gt;</span><br><span class="line">	            &lt;exclusion&gt;</span><br><span class="line">	            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">	            &lt;artifactId&gt;spring-boot-starter-tomcat&lt;/artifactId&gt;</span><br><span class="line">	            &lt;/exclusion&gt;</span><br><span class="line">	        &lt;/exclusions&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<p>���������</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;javax.servlet&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;3.1.0&lt;/version&gt;</span><br><span class="line">      &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<p>�����ʽΪwar��</p>
-<p>���ԣ�</p>
-<blockquote>
-<p>��ӣ�<packaging>war</packaging></p>
-</blockquote>
-<p>Ȼ����maven install ����war��</p>
-<p>���ִ���</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">����mySql���ݿ�ʱ���� Cause: java.sql.SQLNonTransientConnectionException: CLIENT_PLUGIN_AUTH is required����</span><br></pre></td></tr></table></figure>
-<p>����취��</p>
-<blockquote>
-<p>����mysql�����汾</p>
-</blockquote>
-<p>���</p>
-<blockquote>
-<p>�ϴ���Centos�ϲ�Ҫ��Ŀ�����ʿ��԰�war����ΪROOT.war</p>
-</blockquote>
-
+        <p>首先：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--移除内嵌的tomcat模块，但是为了我们再本机测试方便，我们还需要引入它，所以配置如下--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    			&lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;</span><br><span class="line">    		&lt;/dependency&gt;</span><br><span class="line">    		&lt;dependency&gt;</span><br><span class="line">    			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    			&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">    			&lt;exclusions&gt;</span><br><span class="line">    	            &lt;exclusion&gt;</span><br><span class="line">    	            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    	            &lt;artifactId&gt;spring-boot-starter-tomcat&lt;/artifactId&gt;</span><br><span class="line">    	            &lt;/exclusion&gt;</span><br><span class="line">    	        &lt;/exclusions&gt;</span><br><span class="line">    		&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>添加依赖:</p>
+        
+          <a class="article-more-a" href="/post/Spring/SpringBoot部署Centos.html#more">more >></a>
+        
       
 
       
@@ -1418,6 +1403,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">java,spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">java,算法</a>
               </li>
              
@@ -1426,15 +1415,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java,spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">shell,linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
