@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://zengzhi.net.cn">
   <title>SpringBoot����Centos | zengzhi_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="����                        org.springframework.boot            spring-boot-starter-thymeleaf                            org.springframework.boot            spring-boot-starter-web">
+  <meta name="description" content="���ȣ� 123456789101112131415&amp;lt;!-- �Ƴ���Ƕ��tomcatģ�飬����Ϊ�������ڱ������Է��㣬���ǻ���Ҫ�������������������� --&amp;gt;		&amp;lt;dependency&amp;gt;			&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;			&amp;lt;artif">
 <meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot����Centos">
 <meta property="og:url" content="http://zengzhi.net.cn/post/Spring/SpringBoot部署Centos.html">
 <meta property="og:site_name" content="zengzhi_blog">
-<meta property="og:description" content="����                        org.springframework.boot            spring-boot-starter-thymeleaf                            org.springframework.boot            spring-boot-starter-web">
+<meta property="og:description" content="���ȣ� 123456789101112131415&amp;lt;!-- �Ƴ���Ƕ��tomcatģ�飬����Ϊ�������ڱ������Է��㣬���ǻ���Ҫ�������������������� --&amp;gt;		&amp;lt;dependency&amp;gt;			&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;			&amp;lt;artif">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-04-28T11:15:32.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot����Centos">
-<meta name="twitter:description" content="����                        org.springframework.boot            spring-boot-starter-thymeleaf                            org.springframework.boot            spring-boot-starter-web">
+<meta name="twitter:description" content="���ȣ� 123456789101112131415&amp;lt;!-- �Ƴ���Ƕ��tomcatģ�飬����Ϊ�������ڱ������Է��㣬���ǻ���Ҫ�������������������� --&amp;gt;		&amp;lt;dependency&amp;gt;			&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;			&amp;lt;artif">
   
     <link rel="alternative" href="/atom.xml" title="zengzhi_blog" type="application/atom+xml">
   
@@ -206,10 +206,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>����<br>    <!-- �Ƴ���Ƕ��tomcatģ�飬����Ϊ�������ڱ������Է��㣬���ǻ���Ҫ�������������������� --><br>        <dependency><br>            <groupid>org.springframework.boot</groupid><br>            <artifactid>spring-boot-starter-thymeleaf</artifactid><br>        </dependency><br>        <dependency><br>            <groupid>org.springframework.boot</groupid><br>            <artifactid>spring-boot-starter-web</artifactid><br>            <exclusions><br>                <exclusion><br>                <groupid>org.springframework.boot</groupid><br>                <artifactid>spring-boot-starter-tomcat</artifactid><br>                </exclusion><br>            </exclusions><br>        </dependency></p>
-<p>���������<br>     <a id="more"></a><br>    <dependency><br>      <groupid>javax.servlet</groupid><br>      <artifactid>javax.servlet-api</artifactid><br>      <version>3.1.0</version><br>      <scope>provided</scope><br>    </dependency><br>�����ʽΪ��war ���ԣ�<br>��ӣ�<packaging>war</packaging><br>    meven���  �������<br>���ִ���<br>    ����mySql���ݿ�ʱ���� Cause: java.sql.SQLNonTransientConnectionException: CLIENT_PLUGIN_AUTH is required����</p>
+        <p>���ȣ�</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- �Ƴ���Ƕ��tomcatģ�飬����Ϊ�������ڱ������Է��㣬���ǻ���Ҫ�������������������� --&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br><span class="line">		&lt;dependency&gt;</span><br><span class="line">			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">			&lt;exclusions&gt;</span><br><span class="line">	            &lt;exclusion&gt;</span><br><span class="line">	            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">	            &lt;artifactId&gt;spring-boot-starter-tomcat&lt;/artifactId&gt;</span><br><span class="line">	            &lt;/exclusion&gt;</span><br><span class="line">	        &lt;/exclusions&gt;</span><br><span class="line">		&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>���������</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;javax.servlet&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;3.1.0&lt;/version&gt;</span><br><span class="line">      &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>�����ʽΪwar��</p>
+<p>���ԣ�</p>
+<blockquote>
+<p>��ӣ�<packaging>war</packaging></p>
+</blockquote>
+<p>Ȼ����maven install ����war��</p>
+<p>���ִ���</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">����mySql���ݿ�ʱ���� Cause: java.sql.SQLNonTransientConnectionException: CLIENT_PLUGIN_AUTH is required����</span><br></pre></td></tr></table></figure>
+<p>����취��</p>
+<blockquote>
 <p>����mysql�����汾</p>
+</blockquote>
+<p>���</p>
+<blockquote>
 <p>�ϴ���Centos�ϲ�Ҫ��Ŀ�����ʿ��԰�war����ΪROOT.war</p>
+</blockquote>
 
       
 
@@ -513,10 +529,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">java,spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">java,算法</a>
               </li>
              
@@ -525,11 +537,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">shell,linux</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color2">java,spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">shell,linux</a>
               </li>
              
               <li class="article-tag-list-item">
