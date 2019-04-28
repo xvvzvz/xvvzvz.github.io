@@ -183,6 +183,108 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Spring/SpringBoot部署Centos" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/post/Spring/SpringBoot部署Centos.html">SpringBoot����Centos</a>
+    </h1>
+  
+
+        
+        <a href="/post/Spring/SpringBoot部署Centos.html" class="archive-article-date">
+  	<time datetime="2019-04-16T15:15:21.901Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>����<br>    <!-- �Ƴ���Ƕ��tomcatģ�飬����Ϊ�������ڱ������Է��㣬���ǻ���Ҫ�������������������� --><br>        <dependency><br>            <groupid>org.springframework.boot</groupid><br>            <artifactid>spring-boot-starter-thymeleaf</artifactid><br>        </dependency><br>        <dependency><br>            <groupid>org.springframework.boot</groupid><br>            <artifactid>spring-boot-starter-web</artifactid><br>            <exclusions><br>                <exclusion><br>                <groupid>org.springframework.boot</groupid><br>                <artifactid>spring-boot-starter-tomcat</artifactid><br>                </exclusion><br>            </exclusions><br>        </dependency></p>
+<p>���������</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+  &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+  &lt;version&gt;3.1.0&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre><p>�����ʽΪ��war ���ԣ�<br>��ӣ�<packaging>war</packaging><br>    meven���  �������<br>���ִ���<br>    ����mySql���ݿ�ʱ���� Cause: java.sql.SQLNonTransientConnectionException: CLIENT_PLUGIN_AUTH is required����</p>
+<p>����mysql�����汾</p>
+<p>�ϴ���Centos�ϲ�Ҫ��Ŀ�����ʿ��԰�war����ΪROOT.war</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+	
+	<!-- 添加代码  -->
+	<span id="busuanzi_container_page_pv">
+	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+	<!-- 结束添加代码  -->
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Spring//" class="article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/post/Spring/SpringBoot部署Centos.html">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Spring/SpringBoot整合Redis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   
   <div class="article-inner">
@@ -1183,118 +1285,6 @@ public ModelAndView imgvrifyControllerDefaultKaptcha(HttpServletRequest httpServ
 
 
   
-    <article id="post-Spring/springcloud_config分布式配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/post/Spring/springcloud_config分布式配置.html">springcloud_config分布式配置---通过git获取码云上的配置文件信息</a>
-    </h1>
-  
-
-        
-        <a href="/post/Spring/springcloud_config分布式配置.html" class="archive-article-date">
-  	<time datetime="2018-11-08T08:28:09.889Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>首先大部分公司是不会选择SpringCloud自带的Config分布式配置中心,因为他不符合中国人的习惯.</p>
-<p>国内比较出名的分布式配置中心: 携程的 apllo(阿波罗)和zookeeper</p>
-<p>不过了解SpringCloud生态，这个是一定要了解的</p>
-<p>接下来讲解SpringCloud自带的分布式配置中心Config的一个小案例：</p>
-<p>准备：配置好的eclipse 和 能上网的环境</p>
-<h3 id="一-处理码云这方面"><a href="#一-处理码云这方面" class="headerlink" title="一.处理码云这方面"></a>一.处理码云这方面</h3><p>首先我们可以注册一个码云账号</p>
-<p>然后在右上角创建一个项目</p>
-<p>然后填写一个.md文件</p>
-<p>接下来建立一个文件夹d_config(名字是随意的)</p>
-<p>在文件夹中先建立一个test-configclient-prd.properties—在文件中写入info=prd.baidu.com</p>
-<p>建立另一个文件夹test-configclient-sit.properties —在文件夹写入info=sit.baidu.com</p>
-<p>(这里有疑问先不管,看后面。)</p>
-<h3 id="二，在eclipse建立maven项目"><a href="#二，在eclipse建立maven项目" class="headerlink" title="二，在eclipse建立maven项目"></a>二，在eclipse建立maven项目</h3><pre><code>首先建立一个名称为spring-cloud-eureka-server的maven项目（用eureka作为配置中心）
-</code></pre><p>管理依赖:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&lt;parent&gt;</span></span><br><span class="line">		<span class="string">&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span></span><br><span class="line">		<span class="string">&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span></span><br><span class="line">		<span class="string">&lt;version&gt;2.0.1.RELEASE&lt;/version&gt;</span></span><br><span class="line">	<span class="string">&lt;/parent&gt;</span></span><br><span class="line">	<span class="string">&lt;!--</span> <span class="string">管理依赖</span> <span class="bullet">--&gt;</span></span><br><span class="line">	<span class="string">&lt;dependencyManagement&gt;</span></span><br><span class="line">		<span class="string">&lt;dependencies&gt;</span></span><br><span class="line">			<span class="string">&lt;dependency&gt;</span></span><br><span class="line">				<span class="string">&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span></span><br><span class="line">				<span class="string">&lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;</span></span><br><span class="line">				<span class="string">&lt;version&gt;Finchley.M7&lt;/version&gt;</span></span><br><span class="line">				<span class="string">&lt;type&gt;pom&lt;/type&gt;</span></span><br><span class="line">				<span class="string">&lt;scope&gt;import&lt;/scope&gt;</span></span><br><span class="line">			<span class="string">&lt;/dependency&gt;</span></span><br><span class="line">		<span class="string">&lt;/dependencies&gt;</span></span><br><span class="line">	<span class="string">&lt;/dependencyManagement&gt;</span></span><br><span class="line">	<span class="string">&lt;dependencies&gt;</span></span><br><span class="line">		<span class="string">&lt;!--SpringCloud</span> <span class="string">eureka-server</span> <span class="bullet">--&gt;</span></span><br><span class="line">		<span class="string">&lt;dependency&gt;</span></span><br><span class="line">			<span class="string">&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span></span><br><span class="line">			<span class="string">&lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;</span></span><br><span class="line">		<span class="string">&lt;/dependency&gt;</span></span><br><span class="line">	<span class="string">&lt;/dependencies&gt;</span></span><br><span class="line">	<span class="string">&lt;!--</span> <span class="string">注意：</span> <span class="string">这里必须要添加，</span> <span class="string">否者各种依赖有问题</span> <span class="bullet">--&gt;</span></span><br><span class="line">	<span class="string">&lt;repositories&gt;</span></span><br><span class="line">		<span class="string">&lt;repository&gt;</span></span><br><span class="line">			<span class="string">&lt;id&gt;spring-milestones&lt;/id&gt;</span></span><br><span class="line">			<span class="string">&lt;name&gt;Spring</span> <span class="string">Milestones&lt;/name&gt;</span></span><br><span class="line">			<span class="string">&lt;url&gt;https://repo.spring.io/libs-milestone&lt;/url&gt;</span></span><br><span class="line">			<span class="string">&lt;snapshots&gt;</span></span><br><span class="line">				<span class="string">&lt;enabled&gt;false&lt;/enabled&gt;</span></span><br><span class="line">			<span class="string">&lt;/snapshots&gt;</span></span><br><span class="line">		<span class="string">&lt;/repository&gt;</span></span><br><span class="line">	<span class="string">&lt;/repositories&gt;</span></span><br></pre></td></tr></table></figure>
-<p>application.yml</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###服务启动端口</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8080</span></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="comment">###eureka基本信息配置</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  instance:</span></span><br><span class="line"><span class="attr">    hostname:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    service-url:</span></span><br><span class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://127.0.0.1:$&#123;server.port&#125;/eureka/</span></span><br><span class="line"><span class="comment">###因为自己是注册中心，不需要注册自己</span></span><br><span class="line"><span class="attr">    register-with-eureka:</span> <span class="literal">false</span></span><br><span class="line"><span class="comment">###因为自己是注册中心,不需要去检索服务信息</span></span><br><span class="line"><span class="attr">    fetch-registry:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<p>建立启动项</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package com.springcloud;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line">import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@SpringBootApplication</span><br><span class="line">@EnableEurekaServer</span><br><span class="line">public class SpringCloudEurekaApplication &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		//开启注册中心</span><br><span class="line">		SpringApplication.run(SpringCloudEurekaApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/post/Spring/springcloud_config分布式配置.html#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-	
-	<!-- 添加代码  -->
-	<span id="busuanzi_container_page_pv">
-	   本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-	<!-- 结束添加代码  -->
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">java,spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Spring//" class="article-tag-list-link color2">Spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/post/Spring/springcloud_config分布式配置.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1423,15 +1413,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">java</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">java,算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">java,spring</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">shell,linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java,算法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1444,10 +1438,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">java,Spring</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">java</a>
               </li>
             
             <div class="clearfix"></div>

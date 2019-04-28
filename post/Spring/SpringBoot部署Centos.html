@@ -6,17 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://zengzhi.net.cn">
-  <title>测试 | zengzhi_blog</title>
+  <title>SpringBoot����Centos | zengzhi_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="java">
+  <meta name="description" content="����                        org.springframework.boot            spring-boot-starter-thymeleaf                            org.springframework.boot            spring-boot-starter-web">
+<meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试">
-<meta property="og:url" content="http://zengzhi.net.cn/post/experience/ceshi.html">
+<meta property="og:title" content="SpringBoot����Centos">
+<meta property="og:url" content="http://zengzhi.net.cn/post/Spring/SpringBoot部署Centos.html">
 <meta property="og:site_name" content="zengzhi_blog">
+<meta property="og:description" content="����                        org.springframework.boot            spring-boot-starter-thymeleaf                            org.springframework.boot            spring-boot-starter-web">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-08T12:04:42.994Z">
+<meta property="og:updated_time" content="2019-04-28T11:12:34.331Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="测试">
+<meta name="twitter:title" content="SpringBoot����Centos">
+<meta name="twitter:description" content="����                        org.springframework.boot            spring-boot-starter-thymeleaf                            org.springframework.boot            spring-boot-starter-web">
   
     <link rel="alternative" href="/atom.xml" title="zengzhi_blog" type="application/atom+xml">
   
@@ -182,7 +185,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-experience/ceshi" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Spring/SpringBoot部署Centos" class="article article-type-post " itemscope itemprop="blogPost">
   
   <div class="article-inner">
     
@@ -190,20 +193,31 @@
         
   
     <h1 class="article-title" itemprop="name">
-      测试
+      SpringBoot����Centos
     </h1>
   
 
         
-        <a href="/post/experience/ceshi.html" class="archive-article-date">
-  	<time datetime="2018-11-23T11:43:31.597Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-23</time>
+        <a href="/post/Spring/SpringBoot部署Centos.html" class="archive-article-date">
+  	<time datetime="2019-04-16T15:15:21.901Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>����<br>    <!-- �Ƴ���Ƕ��tomcatģ�飬����Ϊ�������ڱ������Է��㣬���ǻ���Ҫ�������������������� --><br>        <dependency><br>            <groupid>org.springframework.boot</groupid><br>            <artifactid>spring-boot-starter-thymeleaf</artifactid><br>        </dependency><br>        <dependency><br>            <groupid>org.springframework.boot</groupid><br>            <artifactid>spring-boot-starter-web</artifactid><br>            <exclusions><br>                <exclusion><br>                <groupid>org.springframework.boot</groupid><br>                <artifactid>spring-boot-starter-tomcat</artifactid><br>                </exclusion><br>            </exclusions><br>        </dependency></p>
+<p>���������</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+  &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+  &lt;version&gt;3.1.0&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre><p>�����ʽΪ��war ���ԣ�<br>��ӣ�<packaging>war</packaging><br>    meven���  �������<br>���ִ���<br>    ����mySql���ݿ�ʱ���� Cause: java.sql.SQLNonTransientConnectionException: CLIENT_PLUGIN_AUTH is required����</p>
+<p>����mysql�����汾</p>
+<p>�ϴ���Centos�ϲ�Ҫ��Ŀ�����ʿ��԰�war����ΪROOT.war</p>
+
       
 
       
@@ -253,7 +267,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
         		</li>
       		
 		</ul>
@@ -265,7 +279,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/experience//" class="article-tag-list-link color1">experience</a>
+        			<a href="/categories/Spring//" class="article-tag-list-link color2">Spring</a>
         		</li>
       		
 		</ul>
@@ -320,7 +334,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://zengzhi.net.cn/post/experience/ceshi.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://zengzhi.net.cn/post/Spring/SpringBoot部署Centos.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -334,18 +348,9 @@
   
 <nav id="article-nav">
   
-    <a href="/post/Spring/Spring-IOC源码解析.html" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Spring IOC 容器源码分析
-        
-      </div>
-    </a>
   
-  
-    <a href="/post/Spring/springcloud_config分布式配置.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">springcloud_config分布式配置---通过git获取码云上的配置文件信息</div>
+    <a href="/post/Spring/SpringBoot整合Redis.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SpringBoot整合Redis</div>
       <i class="icon-circle-right"></i>
     </a>
   
