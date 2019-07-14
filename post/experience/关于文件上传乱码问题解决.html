@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://zengzhi.net.cn">
-  <title>SpringBoot部署Centos | zengzhi_blog</title>
+  <title>关于文件上传乱码问题记录 | zengzhi_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="首先： 123456789101112131415&amp;lt;!--移除内嵌的tomcat模块，但是为了我们再本机测试方便，我们还需要引入它，所以配置如下--&amp;gt;&amp;lt;dependency&amp;gt;    			&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;    			&amp;lt;artifactId&amp;gt;spring-boot-st">
-<meta name="keywords" content="Spring">
+  <meta name="description" content="title: 关于文件上传乱码问题解决first12乱码由来：	是因为编码格式的问题 1保存时用utf-8保存或者是用高级记事本打开用utf-8编码格式编写">
+<meta name="keywords" content="exp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringBoot部署Centos">
-<meta property="og:url" content="http://zengzhi.net.cn/post/Spring/SpringBoot部署Centos.html">
+<meta property="og:title" content="关于文件上传乱码问题记录">
+<meta property="og:url" content="http://zengzhi.net.cn/post/experience/关于文件上传乱码问题解决.html">
 <meta property="og:site_name" content="zengzhi_blog">
-<meta property="og:description" content="首先： 123456789101112131415&amp;lt;!--移除内嵌的tomcat模块，但是为了我们再本机测试方便，我们还需要引入它，所以配置如下--&amp;gt;&amp;lt;dependency&amp;gt;    			&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;    			&amp;lt;artifactId&amp;gt;spring-boot-st">
+<meta property="og:description" content="title: 关于文件上传乱码问题解决first12乱码由来：	是因为编码格式的问题 1保存时用utf-8保存或者是用高级记事本打开用utf-8编码格式编写">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-28T11:38:13.224Z">
+<meta property="og:updated_time" content="2019-07-14T10:27:55.260Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SpringBoot部署Centos">
-<meta name="twitter:description" content="首先： 123456789101112131415&amp;lt;!--移除内嵌的tomcat模块，但是为了我们再本机测试方便，我们还需要引入它，所以配置如下--&amp;gt;&amp;lt;dependency&amp;gt;    			&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;    			&amp;lt;artifactId&amp;gt;spring-boot-st">
+<meta name="twitter:title" content="关于文件上传乱码问题记录">
+<meta name="twitter:description" content="title: 关于文件上传乱码问题解决first12乱码由来：	是因为编码格式的问题 1保存时用utf-8保存或者是用高级记事本打开用utf-8编码格式编写">
   
     <link rel="alternative" href="/atom.xml" title="zengzhi_blog" type="application/atom+xml">
   
@@ -185,7 +185,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Spring/SpringBoot部署Centos" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-experience/关于文件上传乱码问题解决" class="article article-type-post " itemscope itemprop="blogPost">
   
   <div class="article-inner">
     
@@ -193,39 +193,22 @@
         
   
     <h1 class="article-title" itemprop="name">
-      SpringBoot部署Centos
+      关于文件上传乱码问题记录
     </h1>
   
 
         
-        <a href="/post/Spring/SpringBoot部署Centos.html" class="archive-article-date">
-  	<time datetime="2019-04-28T11:28:04.267Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-04-28</time>
+        <a href="/post/experience/关于文件上传乱码问题解决.html" class="archive-article-date">
+  	<time datetime="2018-06-30T05:04:49.763Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>首先：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--移除内嵌的tomcat模块，但是为了我们再本机测试方便，我们还需要引入它，所以配置如下--&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    			&lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;</span><br><span class="line">    		&lt;/dependency&gt;</span><br><span class="line">    		&lt;dependency&gt;</span><br><span class="line">    			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    			&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">    			&lt;exclusions&gt;</span><br><span class="line">    	            &lt;exclusion&gt;</span><br><span class="line">    	            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    	            &lt;artifactId&gt;spring-boot-starter-tomcat&lt;/artifactId&gt;</span><br><span class="line">    	            &lt;/exclusion&gt;</span><br><span class="line">    	        &lt;/exclusions&gt;</span><br><span class="line">    		&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<p>添加依赖:</p>
-<a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;javax.servlet&lt;/groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;</span><br><span class="line">          &lt;version&gt;3.1.0&lt;/version&gt;</span><br><span class="line">          &lt;scope&gt;provided&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-<p>打包方式：</p>
-<blockquote>
-<packaging>war</packaging>
-</blockquote>
-<p>然后点击maven install 生成war包 </p>
-<p>出现错误：</p>
-<blockquote>
-<p>连接mySql数据库时出现 Cause: java.sql.SQLNonTransientConnectionException: CLIENT_PLUGIN_AUTH is required</p>
-</blockquote>
-<p>错误解决方式：</p>
-<blockquote>
-<p>降低mysql驱动版本</p>
-</blockquote>
-<p>最后：  上传Centos上不用项目名访问 可以把war包改名为ROOT.war</p>
-
+        <hr>
+<h2 id="title-关于文件上传乱码问题解决"><a href="#title-关于文件上传乱码问题解决" class="headerlink" title="title: 关于文件上传乱码问题解决"></a>title: 关于文件上传乱码问题解决</h2><p>first<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">乱码由来：</span><br><span class="line">	是因为编码格式的问题</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">保存时用utf-8保存或者是用高级记事本打开用utf-8编码格式编写</span><br></pre></td></tr></table></figure>
       
 
       
@@ -275,7 +258,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">exp</a>
         		</li>
       		
 		</ul>
@@ -287,7 +270,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Spring//" class="article-tag-list-link color2">Spring</a>
+        			<a href="/categories/experience//" class="article-tag-list-link color1">experience</a>
         		</li>
       		
 		</ul>
@@ -342,7 +325,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://zengzhi.net.cn/post/Spring/SpringBoot部署Centos.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://zengzhi.net.cn/post/experience/关于文件上传乱码问题解决.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -356,20 +339,15 @@
   
 <nav id="article-nav">
   
-    <a href="/post/data-mining/data_mining_introduce.html" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/post/experience/文件上传之git命令.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Data mining introduce
+          文件上传之git命令
         
       </div>
     </a>
   
-  
-    <a href="/post/Spring/SpringBoot整合Redis.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">SpringBoot整合Redis</div>
-      <i class="icon-circle-right"></i>
-    </a>
   
 </nav>
 
@@ -394,7 +372,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#title-关于文件上传乱码问题解决"><span class="toc-number">1.</span> <span class="toc-text">title: 关于文件上传乱码问题解决</span></a></li></ol>
                     </div>
                 </span>
             </div>
